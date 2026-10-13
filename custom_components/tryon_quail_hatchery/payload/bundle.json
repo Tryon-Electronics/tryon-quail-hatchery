@@ -10,43 +10,43 @@
     {
       "source": "cards/quail-hatchery-card.yaml",
       "destination": "cards/quail-hatchery-card.yaml",
-      "sha256": "7a3ccda25da354b940e1d4bec48a6a58a832d1b2c4b29ac400b2bc07423ccb24",
+      "sha256": "fc091a8d610481cd7141be953d074facbcd83be7935d922dba4509403dcfe290",
       "seed_only": false
     },
     {
       "source": "dashboards/quail-hatchery.yaml",
       "destination": "dashboards/quail-hatchery.yaml",
-      "sha256": "2b414a535437d8a4a15e384667743f1a5005f454194dcf0af35fb2e2228d2b58",
+      "sha256": "3e1a6e09ea0c84d2bda5c5a11febc6e829ccc81de38e2d39ff5b101abc7ba577",
       "seed_only": false
     },
     {
       "source": "examples/batches.example.json",
       "destination": "tryon_quail_hatchery/examples/batches.example.json",
-      "sha256": "ba3071c48f7d3d1504442f572db4e8c0276034e2474cb016d61f7b7b124eb855",
+      "sha256": "ad886c2a9894b081a0c13f18c3c8fbe4b0f5275368de70e55fd610b98f1d47ee",
       "seed_only": false
     },
     {
       "source": "examples/incubator_notifications.example.yaml",
       "destination": "tryon_quail_hatchery/automations/incubator_notifications.example.yaml",
-      "sha256": "9d0317548cb24da4efbd0c93a31ebfd5a42c8a1ae48b6c7493d9fdb351dfab67",
+      "sha256": "7781aa790c2819e9b5178f84ed368430b21ddedc57370be2c16e746da22e11f1",
       "seed_only": false
     },
     {
       "source": "incubator_data/batches.json",
       "destination": "incubator_data/batches.json",
-      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
       "seed_only": true
     },
     {
       "source": "packages/incubator.yaml",
       "destination": "packages/incubator.yaml",
-      "sha256": "688ac7397109a9596edb5cfa6c8960261dd0cf99de702639670f4bdc24ac7c82",
+      "sha256": "a672501e85a2bb04e0a002af0c967dd0338af31711addc259dc7f8eae8e51f56",
       "seed_only": false
     },
     {
       "source": "pyscript/incubator.py",
       "destination": "pyscript/incubator.py",
-      "sha256": "71bc9549a6c3fb1fe1c0b3d992a79e11022c304689b963748d0769cc911858db",
+      "sha256": "01be9e1b6379178deaa0f9b8dca23adbf90d994769256ac51c53baf601cd1f96",
       "seed_only": false
     },
     {

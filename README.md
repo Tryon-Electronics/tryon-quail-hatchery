@@ -1,6 +1,6 @@
 # Tryon Quail Hatchery
 
-Public beta **0.1.0**: a HACS custom integration that prepares the supplied
+Public beta **0.1.1**: a HACS custom integration that prepares the supplied
 Pyscript hatch tracker, all 27 helpers, the illustrated dashboard and reusable
 card, artwork, JSON storage, and a daily status/milestone notification blueprint.
 
@@ -160,3 +160,38 @@ Primary references: [HACS integration structure](https://hacs.dev/docs/publish/i
 [Home Assistant packages](https://www.home-assistant.io/docs/configuration/packages/),
 [Pyscript configuration](https://hacs-pyscript.readthedocs.io/en/latest/reference.html),
 [Blueprint selectors](https://www.home-assistant.io/docs/blueprint/selectors/).
+
+## Dashboard screenshots
+
+Screenshots supplied from the working owner installation. These illustrate the interface and example records; they are not evidence of a completed live test of the distributable installer.
+
+### Dashboard overview
+
+![Dashboard overview](docs/screenshots/dashboard.png)
+
+Active incubation, hatch history, summary metrics and the bird-tag registry in one view.
+
+### Start a new hatch
+
+![Start a new hatch](docs/screenshots/new-hatch.png)
+
+Create a batch with egg count, species, start date and incubation milestones.
+
+### Edit batch details
+
+![Edit batch details](docs/screenshots/batch-editor.png)
+
+Review and update a batch’s dates, egg count and incubation settings.
+
+### Record hatch results
+
+![Record hatch results](docs/screenshots/hatch-results.png)
+
+Track hatched chicks, infertile eggs and losses, with hatch-rate and accounting feedback.
+
+### Tags, notes and batch actions
+
+![Tags, notes and batch actions](docs/screenshots/tag-editor.png)
+
+Assign or edit bird tags, save hatch notes and manage archived batches.
+

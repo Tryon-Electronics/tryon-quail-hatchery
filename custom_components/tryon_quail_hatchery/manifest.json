@@ -1,7 +1,7 @@
 {
   "domain": "tryon_quail_hatchery",
   "name": "Tryon Quail Hatchery",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "documentation": "https://github.com/Tryon-Electronics/tryon-quail-hatchery",
   "issue_tracker": "https://github.com/Tryon-Electronics/tryon-quail-hatchery/issues",
   "codeowners": [

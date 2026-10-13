@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 - 2026-10-13
+
+- Added five supplied dashboard/workflow screenshots to the repository and source bundle.
+- Documentation-only update; tracker, helpers and notification logic are unchanged.
+
 ## 0.1.0 - 2026-10-13
 
 - First public beta of the owner-supplied hatchery tracker/dashboard.

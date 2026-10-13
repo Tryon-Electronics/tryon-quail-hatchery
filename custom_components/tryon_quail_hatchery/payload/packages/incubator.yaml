@@ -1,0 +1,248 @@
+# ============================================================
+# EGG INCUBATOR - HOME ASSISTANT HELPERS + QUAIL TAG TRACKING
+# File: /config/packages/incubator.yaml
+# ============================================================
+
+input_text:
+
+  # ----------------------------------------------------------
+  # NEW BATCH
+  # ----------------------------------------------------------
+
+  incubator_batch_name:
+    name: Batch Name
+    icon: mdi:tag-text
+    max: 100
+
+  incubator_species:
+    name: Species
+    icon: mdi:bird
+    max: 100
+    initial: Coturnix
+
+  incubator_start_date:
+    name: Start Date
+    icon: mdi:calendar-start
+    max: 10
+
+  # ----------------------------------------------------------
+  # BATCH EDITOR
+  # ----------------------------------------------------------
+
+  incubator_edit_id:
+    name: Incubator Edit Batch ID
+    icon: mdi:identifier
+    max: 20
+
+  incubator_edit_name:
+    name: Batch Name
+    icon: mdi:tag-text
+    max: 100
+
+  incubator_edit_species:
+    name: Species
+    icon: mdi:bird
+    max: 100
+
+  incubator_edit_start_date:
+    name: Start Date
+    icon: mdi:calendar-start
+    max: 10
+
+  incubator_edit_notes:
+    name: Hatch Notes
+    icon: mdi:notebook-edit
+    max: 255
+
+  # ----------------------------------------------------------
+  # QUAIL IDENTIFICATION TAG EDITOR
+  # ----------------------------------------------------------
+
+  incubator_tag_edit_id:
+    name: Quail Tag Record ID
+    icon: mdi:identifier
+    max: 50
+
+  incubator_tag_number:
+    name: Tag Number
+    icon: mdi:numeric
+    max: 20
+
+  incubator_tag_notes:
+    name: Quail Tag Notes
+    icon: mdi:notebook-edit
+    max: 255
+
+
+# ============================================================
+# NUMBER HELPERS
+# ============================================================
+
+input_number:
+
+  # ----------------------------------------------------------
+  # NEW BATCH
+  # ----------------------------------------------------------
+
+  incubator_eggs:
+    name: Eggs Set
+    icon: mdi:egg
+    min: 1
+    max: 1000
+    step: 1
+    mode: box
+    initial: 12
+
+  incubator_days:
+    name: Incubation Days
+    icon: mdi:calendar-range
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 18
+
+  incubator_lockdown:
+    name: Lockdown Day
+    icon: mdi:lock-clock
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 14
+
+  incubator_candle:
+    name: Candling Day
+    icon: mdi:flashlight
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 7
+
+  # ----------------------------------------------------------
+  # BATCH EDITOR
+  # ----------------------------------------------------------
+
+  incubator_edit_eggs:
+    name: Eggs Set
+    icon: mdi:egg
+    min: 1
+    max: 1000
+    step: 1
+    mode: box
+    initial: 12
+
+  incubator_edit_days:
+    name: Incubation Days
+    icon: mdi:calendar-range
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 18
+
+  incubator_edit_lockdown:
+    name: Lockdown Day
+    icon: mdi:lock-clock
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 14
+
+  incubator_edit_candle:
+    name: Candling Day
+    icon: mdi:flashlight
+    min: 1
+    max: 100
+    step: 1
+    mode: box
+    initial: 7
+
+  incubator_edit_hatched:
+    name: Hatched Eggs
+    icon: mdi:egg-easter
+    min: 0
+    max: 1000
+    step: 1
+    mode: box
+    initial: 0
+
+  incubator_edit_infertile:
+    name: Infertile Eggs
+    icon: mdi:egg-off
+    min: 0
+    max: 1000
+    step: 1
+    mode: box
+    initial: 0
+
+  incubator_edit_losses:
+    name: Incubation Losses
+    icon: mdi:heart-broken
+    min: 0
+    max: 1000
+    step: 1
+    mode: box
+    initial: 0
+
+
+# ============================================================
+# SELECT HELPERS
+# ============================================================
+
+input_select:
+
+  incubator_tag_pick:
+    name: Select Quail Tag
+    icon: mdi:tag-search
+    options:
+      - "➕ Add New Tag"
+
+  incubator_tag_color:
+    name: Tag Color
+    icon: mdi:palette
+    options:
+      - Red
+      - Orange
+      - Yellow
+      - Green
+      - Blue
+      - Purple
+      - Pink
+      - White
+      - Black
+    initial: Blue
+
+  incubator_tag_sex:
+    name: Quail Sex
+    icon: mdi:gender-male-female
+    options:
+      - Unknown
+      - Male
+      - Female
+    initial: Unknown
+
+  incubator_tag_status_value:
+    name: Quail Status
+    icon: mdi:bird
+    options:
+      - Active
+      - Sold
+      - Rehomed
+      - Deceased
+      - Retired
+    initial: Active
+
+
+# ============================================================
+# BOOLEAN HELPERS
+# ============================================================
+
+input_boolean:
+
+  incubator_edit_archived:
+    name: Batch Archived
+    icon: mdi:archive
+    initial: false

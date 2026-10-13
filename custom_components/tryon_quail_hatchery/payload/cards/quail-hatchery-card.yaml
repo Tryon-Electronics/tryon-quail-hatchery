@@ -1,0 +1,241 @@
+type: vertical-stack
+cards:
+- type: picture
+  image: /local/tryon-quail-hatchery/quail-family-bg.png
+  tap_action:
+    action: none
+  hold_action:
+    action: none
+  card_mod:
+    style: "ha-card {\n  border-radius: 30px !important;\n  overflow: hidden;\n\n  border:\n    2px solid rgba(112, 76, 28, 0.20);\n\n  box-shadow:\n    0 12px 32px rgba(54, 37, 14, 0.24);\n\n  animation:\n    quailHeroFloat 7s ease-in-out infinite;\n}\n\n@keyframes quailHeroFloat {\n  0%, 100% {\n    transform: translateY(0px);\n  }\n\n  50% {\n    transform: translateY(-3px);\n  }\n}\n"
+- type: custom:mushroom-title-card
+  title: 🌟 Hatchery Adventure
+  subtitle: 'Follow every little egg from incubation to fluffy chick
+
+    '
+  card_mod:
+    style: "ha-card {\n  --primary-text-color: #2b1c0d !important;\n  --secondary-text-color: #4a331b !important;\n\n  border-radius: 22px;\n\n  background:\n    rgba(255, 249, 229, 0.98) !important;\n\n  padding: 6px;\n\n  box-shadow:\n    0 7px 20px rgba(70,45,15,0.14);\n}\n"
+- type: grid
+  columns: 2
+  square: false
+  cards:
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_active_batches
+    primary: '{{ states(entity) }}
+
+      '
+    secondary: 🐣 Active Batches
+    icon: mdi:egg-multiple
+    color: amber
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #2a1b0b !important;\n  --secondary-text-color: #493018 !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(255,252,230,0.99),\n      rgba(255,225,145,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(120,80,20,0.18);\n\n  box-shadow:\n    0 8px 22px rgba(65,45,10,0.18);\n\n  animation:\n    summaryFloat1 5s ease-in-out infinite;\n}\n\n@keyframes summaryFloat1 {\n  0%, 100% {\n    transform: translateY(0);\n  }\n\n  50% {\n    transform: translateY(-3px);\n  }\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_total_eggs
+    primary: '{{ states(entity) }}
+
+      '
+    secondary: 🥚 Eggs Tracked
+    icon: mdi:egg
+    color: orange
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #2a1b0b !important;\n  --secondary-text-color: #493018 !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(255,249,232,0.99),\n      rgba(255,207,148,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(120,80,20,0.18);\n\n  box-shadow:\n    0 8px 22px rgba(65,45,10,0.18);\n\n  animation:\n    summaryFloat2 5.8s ease-in-out infinite;\n}\n\n@keyframes summaryFloat2 {\n  0%, 100% {\n    transform: translateY(0);\n  }\n\n  50% {\n    transform: translateY(-3px);\n  }\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_next_lockdown
+    primary: "{% set d = states(entity) %}\n{% if d in ['unknown', 'unavailable'] %}\n  —\n{% elif d | int(0) == 0 %}\n  TODAY!\n{% elif d | int(0) == 1 %}\n  Tomorrow\n{% else %}\n  {{ d }} days\n{% endif %}\n"
+    secondary: "{% set batch =\n  state_attr(\n    entity,\n    'batch_name'\n  )\n%}\n{% if batch %}\n  \U0001F512 {{ batch }}\n{% else %}\n  \U0001F512 Next Lockdown\n{% endif %}\n"
+    icon: mdi:lock-clock
+    color: orange
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #321a0c !important;\n  --secondary-text-color: #56301c !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(255,244,230,0.99),\n      rgba(255,190,145,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(145,70,20,0.20);\n\n  box-shadow:\n    0 8px 22px rgba(75,45,15,0.18);\n\n  animation:\n    lockdownGlow 3s ease-in-out infinite;\n}\n\n@keyframes lockdownGlow {\n  0%, 100% {\n    box-shadow:\n      0 8px 22px rgba(75,45,15,0.18);\n  }\n\n  50% {\n    box-shadow:\n      0 8px 30px rgba(235,120,35,0.42);\n  }\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_next_hatch
+    primary: "{% set d = states(entity) %}\n{% if d in ['unknown', 'unavailable'] %}\n  —\n{% elif d | int(0) == 0 %}\n  TODAY! \U0001F425\n{% elif d | int(0) == 1 %}\n  Tomorrow\n{% else %}\n  {{ d }} days\n{% endif %}\n"
+    secondary: "{% set batch =\n  state_attr(\n    entity,\n    'batch_name'\n  )\n%}\n{% if batch %}\n  \U0001F425 {{ batch }}\n{% else %}\n  \U0001F425 Next Hatch\n{% endif %}\n"
+    icon: mdi:egg-easter
+    color: pink
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #361421 !important;\n  --secondary-text-color: #5c293d !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(255,240,247,0.99),\n      rgba(255,190,218,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(150,65,100,0.18);\n\n  box-shadow:\n    0 8px 22px rgba(75,35,50,0.18);\n\n  animation:\n    hatchGlow 2.8s ease-in-out infinite;\n}\n\n@keyframes hatchGlow {\n  0%, 100% {\n    box-shadow:\n      0 8px 22px rgba(75,35,50,0.18);\n  }\n\n  50% {\n    box-shadow:\n      0 8px 31px rgba(230,90,155,0.42);\n  }\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_total_hatched
+    primary: '{{ states(entity) }}
+
+      '
+    secondary: 🐥 Chicks Hatched
+    icon: mdi:bird
+    color: green
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #15351c !important;\n  --secondary-text-color: #28512f !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(239,255,235,0.99),\n      rgba(177,237,183,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(50,110,60,0.18);\n\n  box-shadow:\n    0 8px 22px rgba(35,90,45,0.17);\n\n  animation:\n    summaryFloat3 6.2s ease-in-out infinite;\n}\n\n@keyframes summaryFloat3 {\n  0%, 100% {\n    transform: translateY(0);\n  }\n\n  50% {\n    transform: translateY(-3px);\n  }\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_lifetime_hatch_rate
+    primary: '{{ states(entity) }}%
+
+      '
+    secondary: 🌱 Hatch Success
+    icon: mdi:chart-line
+    color: teal
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #103b34 !important;\n  --secondary-text-color: #275b51 !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      145deg,\n      rgba(232,255,250,0.99),\n      rgba(169,229,215,0.99)\n    ) !important;\n\n  border:\n    1px solid rgba(45,110,95,0.18);\n\n  box-shadow:\n    0 8px 22px rgba(35,90,75,0.17);\n\n  animation:\n    summaryFloat4 5.5s ease-in-out infinite;\n}\n\n@keyframes summaryFloat4 {\n  0%, 100% {\n    transform: translateY(0);\n  }\n\n  50% {\n    transform: translateY(-3px);\n  }\n}\n"
+- type: grid
+  columns: 2
+  square: false
+  cards:
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_active_tags
+    primary: '{{ states(entity) }}
+
+      '
+    secondary: 🏷️ Active Tagged Quail
+    icon: mdi:tag-multiple
+    color: blue
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #15324a !important;\n  --secondary-text-color: #31566f !important;\n  border-radius: 24px;\n  background: linear-gradient(145deg, rgba(236,248,255,0.99), rgba(190,225,250,0.99)) !important;\n  border: 1px solid rgba(50,100,140,0.18);\n  box-shadow: 0 8px 22px rgba(35,75,105,0.16);\n}\n"
+  - type: custom:mushroom-template-card
+    entity: sensor.incubator_untagged_chicks
+    primary: '{{ states(entity) }}
+
+      '
+    secondary: 🐥 Chicks Needing Tags
+    icon: mdi:tag-off
+    color: orange
+    vertical: true
+    tap_action:
+      action: none
+    card_mod:
+      style: "ha-card {\n  --primary-text-color: #4d2d0d !important;\n  --secondary-text-color: #71451d !important;\n  border-radius: 24px;\n  background: linear-gradient(145deg, rgba(255,248,230,0.99), rgba(255,217,163,0.99)) !important;\n  border: 1px solid rgba(140,90,30,0.18);\n  box-shadow: 0 8px 22px rgba(90,60,25,0.16);\n}\n"
+- type: custom:mushroom-template-card
+  entity: sensor.incubator_data_status
+  primary: "{% if is_state(entity, 'error') %}\n  ⚠️ Incubator Data Problem\n{% else %}\n  ⚠️ Check Incubator Data\n{% endif %}\n"
+  secondary: '{{ state_attr(entity, ''message'') or ''Check /config/incubator_data/batches.json'' }}
+
+    '
+  icon: mdi:database-alert
+  color: red
+  multiline_secondary: true
+  tap_action:
+    action: more-info
+  visibility:
+  - condition: state
+    entity: sensor.incubator_data_status
+    state_not: ok
+  card_mod:
+    style: "ha-card {\n  --primary-text-color: #5a1717 !important;\n  --secondary-text-color: #7b3434 !important;\n  border-radius: 24px;\n  background: rgba(255,232,232,0.98) !important;\n  border: 2px solid rgba(190,45,45,0.24);\n  box-shadow: 0 8px 24px rgba(150,40,40,0.16);\n}\n"
+- type: custom:mushroom-template-card
+  primary: 🥚 Start a New Hatch!
+  secondary: 'Add a new group of eggs to the family hatchery
+
+    '
+  icon: mdi:egg-plus
+  color: green
+  tap_action:
+    action: fire-dom-event
+    browser_mod:
+      service: browser_mod.popup
+      data:
+        title: 🥚 Start a New Hatch
+        adaptive: true
+        adaptive_force_bottom_sheet: true
+        initial_style: wide
+        content:
+          type: vertical-stack
+          cards:
+          - type: custom:mushroom-template-card
+            primary: 🐣 A New Adventure Begins!
+            secondary: 'Add the eggs going into the incubator
+
+              '
+            icon: mdi:egg-plus
+            color: green
+            card_mod:
+              style: "ha-card {\n  --primary-text-color: #18351d !important;\n  --secondary-text-color: #315538 !important;\n\n  border-radius: 24px;\n\n  background:\n    linear-gradient(\n      135deg,\n      rgba(235,255,228,1),\n      rgba(178,239,183,1)\n    ) !important;\n\n  border:\n    1px solid rgba(55,115,65,0.18);\n}\n"
+          - type: markdown
+            content: '### 🥚 New Hatch
+
+
+              Fill in the batch information below.
+
+
+              **Start Date:** `YYYY-MM-DD`
+
+
+              Leave Start Date blank to use today''s date.
+
+              '
+            card_mod:
+              style: "ha-card {\n  --primary-text-color: #291b0d !important;\n\n  color: #291b0d !important;\n\n  border-radius: 22px;\n\n  background:\n    linear-gradient(\n      135deg,\n      rgba(255,249,225,1),\n      rgba(255,226,167,1)\n    ) !important;\n}\n"
+          - type: entities
+            title: 🥚 Egg Information
+            show_header_toggle: false
+            entities:
+            - entity: input_text.incubator_batch_name
+              name: Batch Name
+              icon: mdi:tag-heart
+            - entity: input_text.incubator_species
+              name: Quail / Species
+              icon: mdi:bird
+            - entity: input_number.incubator_eggs
+              name: Eggs Set
+              icon: mdi:egg
+            - entity: input_text.incubator_start_date
+              name: Start Date
+              icon: mdi:calendar-start
+            - entity: input_number.incubator_days
+              name: Incubation Days
+              icon: mdi:calendar-range
+            - entity: input_number.incubator_candle
+              name: Candling Day
+              icon: mdi:flashlight
+            - entity: input_number.incubator_lockdown
+              name: Lockdown Day
+              icon: mdi:lock-clock
+            card_mod:
+              style: "ha-card {\n  --primary-text-color: #24170a !important;\n  --secondary-text-color: #43301d !important;\n\n  color: #24170a !important;\n\n  border-radius: 22px;\n\n  background:\n    rgba(255,253,246,1) !important;\n\n  border:\n    1px solid rgba(100,70,25,0.15);\n}\n"
+          - type: custom:mushroom-template-card
+            entity: sensor.incubator_add_status
+            primary: "{{ state_attr(\n    entity,\n    'message'\n) or 'Ready for a new hatch!' }}\n"
+            icon: "{{ state_attr(\n    entity,\n    'icon'\n) or 'mdi:egg-plus' }}\n"
+            color: "{% set status = states(entity) %}\n{% if status == 'success' %}\n  green\n{% elif status == 'error' %}\n  red\n{% elif status == 'warning' %}\n  orange\n{% else %}\n  blue\n{% endif %}\n"
+            card_mod:
+              style: "ha-card {\n  --primary-text-color: #24170a !important;\n  --secondary-text-color: #43301d !important;\n\n  border-radius: 22px;\n\n  background:\n    rgba(255,250,237,1) !important;\n}\n"
+          - type: custom:mushroom-template-card
+            primary: 🐣 Create This Batch
+            secondary: 'Add these eggs to Quail Hatchery HQ
+
+              '
+            icon: mdi:egg-plus
+            color: green
+            tap_action:
+              action: perform-action
+              perform_action: pyscript.incubator_add_from_helpers
+            card_mod:
+              style: "ha-card {\n  --primary-text-color: #15351c !important;\n  --secondary-text-color: #295033 !important;\n\n  border-radius: 22px;\n\n  background:\n    linear-gradient(\n      135deg,\n      rgba(226,255,222,1),\n      rgba(164,235,173,1)\n    ) !important;\n\n  border:\n    1px solid rgba(50,120,60,0.20);\n}\n"
+          - type: custom:mushroom-template-card
+            primary: Close
+            icon: mdi:close
+            color: grey
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.close_popup
+  card_mod:
+    style: "ha-card {\n  --primary-text-color: #15351c !important;\n  --secondary-text-color: #28512f !important;\n\n  border-radius: 26px;\n\n  background:\n    linear-gradient(\n      135deg,\n      rgba(229,255,223,0.99),\n      rgba(160,235,169,0.99)\n    ) !important;\n\n  border:\n    2px solid rgba(65,150,75,0.28);\n\n  box-shadow:\n    0 10px 27px rgba(45,130,60,0.22);\n\n  animation:\n    addBatchPulse 2.8s ease-in-out infinite;\n}\n\n@keyframes addBatchPulse {\n  0%, 100% {\n    transform: scale(1);\n  }\n\n  50% {\n    transform: scale(1.012);\n  }\n}\n"

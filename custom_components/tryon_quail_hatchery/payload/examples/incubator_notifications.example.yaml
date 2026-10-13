@@ -1,0 +1,9 @@
+- alias: Incubator - Daily Status & Milestone Alerts
+  initial_state: false
+  use_blueprint:
+    path: incubator/incubator_notifications.yaml
+    input:
+      phone_notification_target:
+        - notify.mobile_app_your_phone
+      notification_time: "09:00:00"
+      daily_summary: true

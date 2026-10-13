@@ -1,0 +1,3482 @@
+views:
+  - title: Incubator
+    path: incubator
+    icon: mdi:egg-easter
+    type: sections
+    max_columns: 4
+    background:
+      image: /local/tryon-quail-hatchery/quail-family-bg.png
+      opacity: 18
+      size: cover
+      alignment: center
+      repeat: no-repeat
+      attachment: fixed
+    sections:
+      - type: grid
+        cards:
+          - type: picture
+            image: /local/tryon-quail-hatchery/quail-family-bg.png
+            tap_action:
+              action: none
+            hold_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 30px !important;
+                  overflow: hidden;
+
+                  border:
+                    2px solid rgba(112, 76, 28, 0.20);
+
+                  box-shadow:
+                    0 12px 32px rgba(54, 37, 14, 0.24);
+
+                  animation:
+                    quailHeroFloat 7s ease-in-out infinite;
+                }
+
+                @keyframes quailHeroFloat {
+                  0%, 100% {
+                    transform: translateY(0px);
+                  }
+
+                  50% {
+                    transform: translateY(-3px);
+                  }
+                }
+          - type: custom:mushroom-title-card
+            title: 🌟 Hatchery Adventure
+            subtitle: |
+              Follow every little egg from incubation to fluffy chick
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #2b1c0d !important;
+                  --secondary-text-color: #4a331b !important;
+
+                  border-radius: 22px;
+
+                  background:
+                    rgba(255, 249, 229, 0.98) !important;
+
+                  padding: 6px;
+
+                  box-shadow:
+                    0 7px 20px rgba(70,45,15,0.14);
+                }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_active_batches
+                primary: |
+                  {{ states(entity) }}
+                secondary: 🐣 Active Batches
+                icon: mdi:egg-multiple
+                color: amber
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #2a1b0b !important;
+                      --secondary-text-color: #493018 !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(255,252,230,0.99),
+                          rgba(255,225,145,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(120,80,20,0.18);
+
+                      box-shadow:
+                        0 8px 22px rgba(65,45,10,0.18);
+
+                      animation:
+                        summaryFloat1 5s ease-in-out infinite;
+                    }
+
+                    @keyframes summaryFloat1 {
+                      0%, 100% {
+                        transform: translateY(0);
+                      }
+
+                      50% {
+                        transform: translateY(-3px);
+                      }
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_total_eggs
+                primary: |
+                  {{ states(entity) }}
+                secondary: 🥚 Eggs Tracked
+                icon: mdi:egg
+                color: orange
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #2a1b0b !important;
+                      --secondary-text-color: #493018 !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(255,249,232,0.99),
+                          rgba(255,207,148,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(120,80,20,0.18);
+
+                      box-shadow:
+                        0 8px 22px rgba(65,45,10,0.18);
+
+                      animation:
+                        summaryFloat2 5.8s ease-in-out infinite;
+                    }
+
+                    @keyframes summaryFloat2 {
+                      0%, 100% {
+                        transform: translateY(0);
+                      }
+
+                      50% {
+                        transform: translateY(-3px);
+                      }
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_next_lockdown
+                primary: |
+                  {% set d = states(entity) %}
+                  {% if d in ['unknown', 'unavailable'] %}
+                    —
+                  {% elif d | int(0) == 0 %}
+                    TODAY!
+                  {% elif d | int(0) == 1 %}
+                    Tomorrow
+                  {% else %}
+                    {{ d }} days
+                  {% endif %}
+                secondary: |
+                  {% set batch =
+                    state_attr(
+                      entity,
+                      'batch_name'
+                    )
+                  %}
+                  {% if batch %}
+                    🔒 {{ batch }}
+                  {% else %}
+                    🔒 Next Lockdown
+                  {% endif %}
+                icon: mdi:lock-clock
+                color: orange
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #321a0c !important;
+                      --secondary-text-color: #56301c !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(255,244,230,0.99),
+                          rgba(255,190,145,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(145,70,20,0.20);
+
+                      box-shadow:
+                        0 8px 22px rgba(75,45,15,0.18);
+
+                      animation:
+                        lockdownGlow 3s ease-in-out infinite;
+                    }
+
+                    @keyframes lockdownGlow {
+                      0%, 100% {
+                        box-shadow:
+                          0 8px 22px rgba(75,45,15,0.18);
+                      }
+
+                      50% {
+                        box-shadow:
+                          0 8px 30px rgba(235,120,35,0.42);
+                      }
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_next_hatch
+                primary: |
+                  {% set d = states(entity) %}
+                  {% if d in ['unknown', 'unavailable'] %}
+                    —
+                  {% elif d | int(0) == 0 %}
+                    TODAY! 🐥
+                  {% elif d | int(0) == 1 %}
+                    Tomorrow
+                  {% else %}
+                    {{ d }} days
+                  {% endif %}
+                secondary: |
+                  {% set batch =
+                    state_attr(
+                      entity,
+                      'batch_name'
+                    )
+                  %}
+                  {% if batch %}
+                    🐥 {{ batch }}
+                  {% else %}
+                    🐥 Next Hatch
+                  {% endif %}
+                icon: mdi:egg-easter
+                color: pink
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #361421 !important;
+                      --secondary-text-color: #5c293d !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(255,240,247,0.99),
+                          rgba(255,190,218,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(150,65,100,0.18);
+
+                      box-shadow:
+                        0 8px 22px rgba(75,35,50,0.18);
+
+                      animation:
+                        hatchGlow 2.8s ease-in-out infinite;
+                    }
+
+                    @keyframes hatchGlow {
+                      0%, 100% {
+                        box-shadow:
+                          0 8px 22px rgba(75,35,50,0.18);
+                      }
+
+                      50% {
+                        box-shadow:
+                          0 8px 31px rgba(230,90,155,0.42);
+                      }
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_total_hatched
+                primary: |
+                  {{ states(entity) }}
+                secondary: 🐥 Chicks Hatched
+                icon: mdi:bird
+                color: green
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #15351c !important;
+                      --secondary-text-color: #28512f !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(239,255,235,0.99),
+                          rgba(177,237,183,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(50,110,60,0.18);
+
+                      box-shadow:
+                        0 8px 22px rgba(35,90,45,0.17);
+
+                      animation:
+                        summaryFloat3 6.2s ease-in-out infinite;
+                    }
+
+                    @keyframes summaryFloat3 {
+                      0%, 100% {
+                        transform: translateY(0);
+                      }
+
+                      50% {
+                        transform: translateY(-3px);
+                      }
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_lifetime_hatch_rate
+                primary: |
+                  {{ states(entity) }}%
+                secondary: 🌱 Hatch Success
+                icon: mdi:chart-line
+                color: teal
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #103b34 !important;
+                      --secondary-text-color: #275b51 !important;
+
+                      border-radius: 24px;
+
+                      background:
+                        linear-gradient(
+                          145deg,
+                          rgba(232,255,250,0.99),
+                          rgba(169,229,215,0.99)
+                        ) !important;
+
+                      border:
+                        1px solid rgba(45,110,95,0.18);
+
+                      box-shadow:
+                        0 8px 22px rgba(35,90,75,0.17);
+
+                      animation:
+                        summaryFloat4 5.5s ease-in-out infinite;
+                    }
+
+                    @keyframes summaryFloat4 {
+                      0%, 100% {
+                        transform: translateY(0);
+                      }
+
+                      50% {
+                        transform: translateY(-3px);
+                      }
+                    }
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_active_tags
+                primary: |
+                  {{ states(entity) }}
+                secondary: 🏷️ Active Tagged Quail
+                icon: mdi:tag-multiple
+                color: blue
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #15324a !important;
+                      --secondary-text-color: #31566f !important;
+                      border-radius: 24px;
+                      background: linear-gradient(145deg, rgba(236,248,255,0.99), rgba(190,225,250,0.99)) !important;
+                      border: 1px solid rgba(50,100,140,0.18);
+                      box-shadow: 0 8px 22px rgba(35,75,105,0.16);
+                    }
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_untagged_chicks
+                primary: |
+                  {{ states(entity) }}
+                secondary: 🐥 Chicks Needing Tags
+                icon: mdi:tag-off
+                color: orange
+                vertical: true
+                tap_action:
+                  action: none
+                card_mod:
+                  style: |
+                    ha-card {
+                      --primary-text-color: #4d2d0d !important;
+                      --secondary-text-color: #71451d !important;
+                      border-radius: 24px;
+                      background: linear-gradient(145deg, rgba(255,248,230,0.99), rgba(255,217,163,0.99)) !important;
+                      border: 1px solid rgba(140,90,30,0.18);
+                      box-shadow: 0 8px 22px rgba(90,60,25,0.16);
+                    }
+          - type: custom:mushroom-template-card
+            entity: sensor.incubator_data_status
+            primary: |
+              {% if is_state(entity, 'error') %}
+                ⚠️ Incubator Data Problem
+              {% else %}
+                ⚠️ Check Incubator Data
+              {% endif %}
+            secondary: >
+              {{ state_attr(entity, 'message') or 'Check
+              /config/incubator_data/batches.json' }}
+            icon: mdi:database-alert
+            color: red
+            multiline_secondary: true
+            tap_action:
+              action: more-info
+            visibility:
+              - condition: state
+                entity: sensor.incubator_data_status
+                state_not: ok
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #5a1717 !important;
+                  --secondary-text-color: #7b3434 !important;
+                  border-radius: 24px;
+                  background: rgba(255,232,232,0.98) !important;
+                  border: 2px solid rgba(190,45,45,0.24);
+                  box-shadow: 0 8px 24px rgba(150,40,40,0.16);
+                }
+          - type: custom:mushroom-template-card
+            primary: 🥚 Start a New Hatch!
+            secondary: |
+              Add a new group of eggs to the family hatchery
+            icon: mdi:egg-plus
+            color: green
+            tap_action:
+              action: fire-dom-event
+              browser_mod:
+                service: browser_mod.popup
+                data:
+                  title: 🥚 Start a New Hatch
+                  adaptive: true
+                  adaptive_force_bottom_sheet: true
+                  initial_style: wide
+                  content:
+                    type: vertical-stack
+                    cards:
+                      - type: custom:mushroom-template-card
+                        primary: 🐣 A New Adventure Begins!
+                        secondary: |
+                          Add the eggs going into the incubator
+                        icon: mdi:egg-plus
+                        color: green
+                        card_mod:
+                          style: |
+                            ha-card {
+                              --primary-text-color: #18351d !important;
+                              --secondary-text-color: #315538 !important;
+
+                              border-radius: 24px;
+
+                              background:
+                                linear-gradient(
+                                  135deg,
+                                  rgba(235,255,228,1),
+                                  rgba(178,239,183,1)
+                                ) !important;
+
+                              border:
+                                1px solid rgba(55,115,65,0.18);
+                            }
+                      - type: markdown
+                        content: |
+                          ### 🥚 New Hatch
+
+                          Fill in the batch information below.
+
+                          **Start Date:** `YYYY-MM-DD`
+
+                          Leave Start Date blank to use today's date.
+                        card_mod:
+                          style: |
+                            ha-card {
+                              --primary-text-color: #291b0d !important;
+
+                              color: #291b0d !important;
+
+                              border-radius: 22px;
+
+                              background:
+                                linear-gradient(
+                                  135deg,
+                                  rgba(255,249,225,1),
+                                  rgba(255,226,167,1)
+                                ) !important;
+                            }
+                      - type: entities
+                        title: 🥚 Egg Information
+                        show_header_toggle: false
+                        entities:
+                          - entity: input_text.incubator_batch_name
+                            name: Batch Name
+                            icon: mdi:tag-heart
+                          - entity: input_text.incubator_species
+                            name: Quail / Species
+                            icon: mdi:bird
+                          - entity: input_number.incubator_eggs
+                            name: Eggs Set
+                            icon: mdi:egg
+                          - entity: input_text.incubator_start_date
+                            name: Start Date
+                            icon: mdi:calendar-start
+                          - entity: input_number.incubator_days
+                            name: Incubation Days
+                            icon: mdi:calendar-range
+                          - entity: input_number.incubator_candle
+                            name: Candling Day
+                            icon: mdi:flashlight
+                          - entity: input_number.incubator_lockdown
+                            name: Lockdown Day
+                            icon: mdi:lock-clock
+                        card_mod:
+                          style: |
+                            ha-card {
+                              --primary-text-color: #24170a !important;
+                              --secondary-text-color: #43301d !important;
+
+                              color: #24170a !important;
+
+                              border-radius: 22px;
+
+                              background:
+                                rgba(255,253,246,1) !important;
+
+                              border:
+                                1px solid rgba(100,70,25,0.15);
+                            }
+                      - type: custom:mushroom-template-card
+                        entity: sensor.incubator_add_status
+                        primary: |
+                          {{ state_attr(
+                              entity,
+                              'message'
+                          ) or 'Ready for a new hatch!' }}
+                        icon: |
+                          {{ state_attr(
+                              entity,
+                              'icon'
+                          ) or 'mdi:egg-plus' }}
+                        color: |
+                          {% set status = states(entity) %}
+                          {% if status == 'success' %}
+                            green
+                          {% elif status == 'error' %}
+                            red
+                          {% elif status == 'warning' %}
+                            orange
+                          {% else %}
+                            blue
+                          {% endif %}
+                        card_mod:
+                          style: |
+                            ha-card {
+                              --primary-text-color: #24170a !important;
+                              --secondary-text-color: #43301d !important;
+
+                              border-radius: 22px;
+
+                              background:
+                                rgba(255,250,237,1) !important;
+                            }
+                      - type: custom:mushroom-template-card
+                        primary: 🐣 Create This Batch
+                        secondary: |
+                          Add these eggs to Quail Hatchery HQ
+                        icon: mdi:egg-plus
+                        color: green
+                        tap_action:
+                          action: perform-action
+                          perform_action: pyscript.incubator_add_from_helpers
+                        card_mod:
+                          style: |
+                            ha-card {
+                              --primary-text-color: #15351c !important;
+                              --secondary-text-color: #295033 !important;
+
+                              border-radius: 22px;
+
+                              background:
+                                linear-gradient(
+                                  135deg,
+                                  rgba(226,255,222,1),
+                                  rgba(164,235,173,1)
+                                ) !important;
+
+                              border:
+                                1px solid rgba(50,120,60,0.20);
+                            }
+                      - type: custom:mushroom-template-card
+                        primary: Close
+                        icon: mdi:close
+                        color: grey
+                        tap_action:
+                          action: fire-dom-event
+                          browser_mod:
+                            service: browser_mod.close_popup
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #15351c !important;
+                  --secondary-text-color: #28512f !important;
+
+                  border-radius: 26px;
+
+                  background:
+                    linear-gradient(
+                      135deg,
+                      rgba(229,255,223,0.99),
+                      rgba(160,235,169,0.99)
+                    ) !important;
+
+                  border:
+                    2px solid rgba(65,150,75,0.28);
+
+                  box-shadow:
+                    0 10px 27px rgba(45,130,60,0.22);
+
+                  animation:
+                    addBatchPulse 2.8s ease-in-out infinite;
+                }
+
+                @keyframes addBatchPulse {
+                  0%, 100% {
+                    transform: scale(1);
+                  }
+
+                  50% {
+                    transform: scale(1.012);
+                  }
+                }
+      - type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🥚 Our Growing Eggs
+            subtitle: |
+              Tap any batch to view or update it
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #2a1b0b !important;
+                  --secondary-text-color: #493018 !important;
+
+                  border-radius: 22px;
+
+                  background:
+                    rgba(255,249,229,0.99) !important;
+
+                  box-shadow:
+                    0 7px 20px rgba(70,45,15,0.15);
+                }
+          - type: markdown
+            content: >
+              ### 👆 Pick a batch
+
+
+              Update incubation details, record the hatch results, archive it,
+              or permanently delete it.
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #281a0d !important;
+                  --secondary-text-color: #49321c !important;
+
+                  color: #281a0d !important;
+
+                  border-radius: 22px;
+
+                  background:
+                    rgba(255,252,242,0.99) !important;
+
+                  border:
+                    1px solid rgba(100,70,25,0.14);
+
+                  box-shadow:
+                    0 6px 18px rgba(60,40,15,0.13);
+                }
+          - type: custom:auto-entities
+            card:
+              type: vertical-stack
+            card_param: cards
+            filter:
+              include:
+                - entity_id: sensor.incubator_batch_*
+                  options:
+                    type: custom:mushroom-template-card
+                    entity: this.entity_id
+                    primary: |
+                      {{ state_attr(
+                          entity,
+                          'friendly_name'
+                      ) }}
+                    secondary: >
+                      🐣 {{ state_attr(entity, 'species') }} • 🥚 {{
+                      state_attr(entity, 'eggs') }} eggs
+
+                      🏷️ Tagged: {{ state_attr(entity, 'tag_count') | int(0) }}
+                      • {% set need = state_attr(entity, 'untagged_chicks') |
+                      int(0) %} {% if need > 0 %}{{ need }} need tag{{ '' if
+                      need == 1 else 's' }}{% else %}all tagged ✅{% endif %}
+
+                      {% set status = state_attr(entity, 'status') %}
+
+                      {% set day = states(entity) | int(0) %}
+
+                      {% set total = state_attr(entity, 'incubation_days') |
+                      int(0) %}
+
+
+                      {% if status == 'Scheduled' %}
+
+                      📅 Starts {{ state_attr(entity, 'start_date') }}
+
+                      {% else %}
+
+                      📅 Day {{ day }} of {{ total }} • {{ status }}
+
+                      {% endif %}
+
+
+                      {% set p = state_attr(entity, 'progress') | int(0) %}
+
+                      {% set blocks = (p / 10) | round(0, 'floor') | int %}
+
+                      {% for i in range(10) %}{{ '🟡' if i < blocks else '⚪'
+                      }}{% endfor %} {{ p }}%
+
+
+                      {% set candle = state_attr(entity, 'days_to_candle') |
+                      int(999) %}
+
+                      {% set lockdown = state_attr(entity, 'days_to_lockdown') |
+                      int(999) %}
+
+                      {% set hatch = state_attr(entity, 'days_to_hatch') |
+                      int(999) %}
+
+
+                      {% if candle == 0 %}
+
+                      🔦 CANDLING TODAY
+
+                      {% elif candle == 1 %}
+
+                      🔦 Candling tomorrow
+
+                      {% endif %}
+
+
+                      {% if lockdown == 0 %}
+
+                      🔒 LOCKDOWN TODAY!
+
+                      {% elif lockdown == 1 %}
+
+                      🔒 Lockdown tomorrow
+
+                      {% elif lockdown > 1 and lockdown < 999 %}
+
+                      🔒 {{ lockdown }} days until lockdown
+
+                      {% endif %}
+
+
+                      {% if hatch == 0 %}
+
+                      🐥 HATCH DAY TODAY!
+
+                      {% elif hatch == 1 %}
+
+                      🐥 Hatch expected tomorrow
+
+                      {% elif hatch > 1 and hatch < 999 %}
+
+                      🐥 {{ hatch }} days until hatch
+
+                      {% endif %}
+
+
+                      {% set hatched = state_attr(entity, 'hatched') | int(0) %}
+
+                      {% set infertile = state_attr(entity, 'infertile') |
+                      int(0) %}
+
+                      {% set losses = state_attr(entity, 'losses') | int(0) %}
+
+
+                      {% if status in ['Hatching', 'Complete'] or
+                      state_attr(entity, 'results_recorded') %}
+
+
+                      🐣 Hatched: {{ hatched }}
+
+                      🚫 Infertile: {{ infertile }}
+
+                      💔 Losses: {{ losses }}
+
+
+                      📊 Hatch Rate: {{ state_attr(entity, 'hatch_percentage')
+                      }}%
+
+
+                      {% set remaining = state_attr(entity, 'unaccounted') |
+                      int(0) %}
+
+
+                      {% if remaining == 0 %}
+
+                      ✅ Every egg is accounted for!
+
+                      {% else %}
+
+                      ❓ {{ remaining }} egg{{ '' if remaining == 1 else 's' }}
+                      still unaccounted
+
+                      {% endif %}
+
+
+                      {% endif %}
+                    multiline_secondary: true
+                    icon: |
+                      {% set status =
+                        state_attr(
+                          entity,
+                          'status'
+                        )
+                      %}
+                      {% if status == 'Scheduled' %}
+                        mdi:calendar-clock
+                      {% elif status == 'Candling' %}
+                        mdi:flashlight
+                      {% elif status == 'Lockdown' %}
+                        mdi:lock
+                      {% elif status == 'Hatching' %}
+                        mdi:egg-easter
+                      {% elif status == 'Complete' %}
+                        mdi:bird
+                      {% else %}
+                        mdi:egg
+                      {% endif %}
+                    color: |
+                      {% set status =
+                        state_attr(
+                          entity,
+                          'status'
+                        )
+                      %}
+                      {% if status == 'Scheduled' %}
+                        grey
+                      {% elif status == 'Candling' %}
+                        yellow
+                      {% elif status == 'Lockdown' %}
+                        orange
+                      {% elif status == 'Hatching' %}
+                        pink
+                      {% elif status == 'Complete' %}
+                        green
+                      {% else %}
+                        blue
+                      {% endif %}
+                    badge_text: |
+                      {{ state_attr(
+                          entity,
+                          'progress'
+                      ) | int(0) }}%
+                    badge_color: |
+                      {% set status =
+                        state_attr(
+                          entity,
+                          'status'
+                        )
+                      %}
+                      {% if status == 'Hatching' %}
+                        pink
+                      {% elif status == 'Complete' %}
+                        green
+                      {% elif status == 'Lockdown' %}
+                        orange
+                      {% else %}
+                        amber
+                      {% endif %}
+                    tap_action:
+                      action: fire-dom-event
+                      browser_mod:
+                        service: browser_mod.sequence
+                        data:
+                          sequence:
+                            - service: pyscript.incubator_load_batch_for_edit
+                              data:
+                                id: this.entity_id
+                            - service: browser_mod.delay
+                              data:
+                                time: 300
+                            - service: browser_mod.popup
+                              data:
+                                title: 🐥 Hatch Batch Editor
+                                adaptive: true
+                                adaptive_force_bottom_sheet: true
+                                initial_style: wide
+                                content:
+                                  type: vertical-stack
+                                  cards:
+                                    - type: custom:mushroom-template-card
+                                      primary: |
+                                        🥚 {{ states(
+                                            'input_text.incubator_edit_name'
+                                        ) }}
+                                      secondary: |
+                                        {{ states(
+                                            'input_text.incubator_edit_species'
+                                        ) }} • Batch #{{ states(
+                                            'input_text.incubator_edit_id'
+                                        ) }}
+                                      icon: |
+                                        {% if is_state(
+                                            'input_boolean.incubator_edit_archived',
+                                            'on'
+                                        ) %}
+                                          mdi:archive
+                                        {% else %}
+                                          mdi:egg-easter
+                                        {% endif %}
+                                      color: |
+                                        {% if is_state(
+                                            'input_boolean.incubator_edit_archived',
+                                            'on'
+                                        ) %}
+                                          grey
+                                        {% else %}
+                                          amber
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #2a1b0b !important;
+                                            --secondary-text-color: #493018 !important;
+
+                                            border-radius: 24px;
+
+                                            background:
+                                              linear-gradient(
+                                                135deg,
+                                                rgba(255,248,219,1),
+                                                rgba(255,216,152,1)
+                                              ) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      entity: sensor.incubator_editor_status
+                                      primary: |
+                                        {{ state_attr(
+                                            entity,
+                                            'message'
+                                        ) or 'Ready' }}
+                                      icon: |
+                                        {{ state_attr(
+                                            entity,
+                                            'icon'
+                                        ) or 'mdi:information' }}
+                                      color: |
+                                        {% set status = states(entity) %}
+                                        {% if status == 'success' %}
+                                          green
+                                        {% elif status == 'error' %}
+                                          red
+                                        {% elif status == 'warning' %}
+                                          orange
+                                        {% else %}
+                                          blue
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,252,241,1) !important;
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🥚 Batch Information
+                                      subtitle: |
+                                        Update the incubation details
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #291b0d !important;
+                                            --secondary-text-color: #4b341e !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_text.incubator_edit_name
+                                          name: Batch Name
+                                          icon: mdi:tag-heart
+                                        - entity: input_text.incubator_edit_species
+                                          name: Species
+                                          icon: mdi:bird
+                                        - entity: input_number.incubator_edit_eggs
+                                          name: Eggs Set
+                                          icon: mdi:egg
+                                        - entity: input_text.incubator_edit_start_date
+                                          name: Start Date
+                                          icon: mdi:calendar-start
+                                        - entity: input_number.incubator_edit_days
+                                          name: Incubation Days
+                                          icon: mdi:calendar-range
+                                        - entity: input_number.incubator_edit_candle
+                                          name: Candling Day
+                                          icon: mdi:flashlight
+                                        - entity: input_number.incubator_edit_lockdown
+                                          name: Lockdown Day
+                                          icon: mdi:lock-clock
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            color: #24170a !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,253,246,1) !important;
+
+                                            border:
+                                              1px solid rgba(100,70,25,0.15);
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🐣 Hatch Results
+                                      subtitle: |
+                                        Fill these in when the chicks arrive!
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17351e !important;
+                                            --secondary-text-color: #31543a !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_number.incubator_edit_hatched
+                                          name: Hatched Chicks
+                                          icon: mdi:bird
+                                        - entity: input_number.incubator_edit_infertile
+                                          name: Infertile Eggs
+                                          icon: mdi:egg-off
+                                        - entity: input_number.incubator_edit_losses
+                                          name: Losses
+                                          icon: mdi:heart-broken
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17351e !important;
+                                            --secondary-text-color: #31543a !important;
+
+                                            color: #17351e !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(244,255,240,1) !important;
+
+                                            border:
+                                              1px solid rgba(55,105,60,0.15);
+                                          }
+                                    - type: grid
+                                      columns: 2
+                                      square: false
+                                      cards:
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {% set eggs =
+                                              states(
+                                                'input_number.incubator_edit_eggs'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set hatched =
+                                              states(
+                                                'input_number.incubator_edit_hatched'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% if eggs > 0 %}
+                                              {{ ((hatched / eggs) * 100) | round(1) }}%
+                                            {% else %}
+                                              0%
+                                            {% endif %}
+                                          secondary: 🐥 Overall Hatch Rate
+                                          icon: mdi:percent
+                                          color: green
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #15351c !important;
+                                                --secondary-text-color: #295033 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(226,250,222,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {% set eggs =
+                                              states(
+                                                'input_number.incubator_edit_eggs'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set infertile =
+                                              states(
+                                                'input_number.incubator_edit_infertile'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set hatched =
+                                              states(
+                                                'input_number.incubator_edit_hatched'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set fertile =
+                                              eggs - infertile
+                                            %}
+                                            {% if fertile > 0 %}
+                                              {{ ((hatched / fertile) * 100) | round(1) }}%
+                                            {% else %}
+                                              0%
+                                            {% endif %}
+                                          secondary: 🌱 Fertile Hatch Rate
+                                          icon: mdi:sprout
+                                          color: teal
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #103b34 !important;
+                                                --secondary-text-color: #275b51 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(221,249,242,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {{ states(
+                                                'input_number.incubator_edit_hatched'
+                                            ) | int(0) }}
+                                          secondary: 🐣 Hatched
+                                          icon: mdi:bird
+                                          color: green
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #15351c !important;
+                                                --secondary-text-color: #295033 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(230,250,226,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {{ states(
+                                                'input_number.incubator_edit_losses'
+                                            ) | int(0) }}
+                                          secondary: 💔 Losses
+                                          icon: mdi:heart-broken
+                                          color: red
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #451821 !important;
+                                                --secondary-text-color: #692b37 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(255,232,235,1) !important;
+                                              }
+                                    - type: custom:mushroom-template-card
+                                      primary: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set remaining =
+                                          eggs - h - i - l
+                                        %}
+                                        {% if remaining < 0 %}
+                                          ⚠️ Too many results entered!
+                                        {% elif remaining == 0 %}
+                                          ⭐ Every egg is accounted for!
+                                        {% else %}
+                                          🥚 {{ remaining }}
+                                          egg{{ '' if remaining == 1 else 's' }}
+                                          left to account for
+                                        {% endif %}
+                                      secondary: >
+                                        Hatched + Infertile + Losses should
+                                        equal Eggs Set
+                                      icon: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set total = h + i + l %}
+                                        {% if total > eggs %}
+                                          mdi:alert-circle
+                                        {% elif total == eggs %}
+                                          mdi:star-circle
+                                        {% else %}
+                                          mdi:egg-outline
+                                        {% endif %}
+                                      color: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set total = h + i + l %}
+                                        {% if total > eggs %}
+                                          red
+                                        {% elif total == eggs %}
+                                          green
+                                        {% else %}
+                                          amber
+                                        {% endif %}
+                                      multiline_secondary: true
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #2a1b0b !important;
+                                            --secondary-text-color: #493018 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,248,221,1) !important;
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🏷️ Quail Identification Tags
+                                      subtitle: >
+                                        Match each hatched chick to its colored
+                                        numbered leg tag
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set tagged = state_attr(e,
+                                        'tag_count') | int(0) %}
+
+                                        {% set hatched = state_attr(e,
+                                        'hatched') | int(0) %}
+
+                                        🏷️ {{ tagged }} of {{ hatched }} chicks
+                                        tagged
+                                      secondary: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set need = state_attr(e,
+                                        'untagged_chicks') | int(0) %}
+
+                                        {% if need > 0 %}
+                                          🐥 {{ need }} chick{{ '' if need == 1 else 's' }} still need{{ '' if need != 1 else 's' }} a tag
+                                        {% elif (state_attr(e, 'hatched') |
+                                        int(0)) > 0 %}
+                                          ✅ Every hatched chick has an ID record
+                                        {% else %}
+                                          Record hatched chicks first, then assign tags
+                                        {% endif %}
+                                      icon: mdi:tag-multiple
+                                      color: blue
+                                      multiline_secondary: true
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                            border-radius: 22px;
+                                            background: rgba(233,247,255,1) !important;
+                                          }
+                                    - type: markdown
+                                      content: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set tags = state_attr(e, 'tags') or
+                                        [] %}
+
+                                        {% if tags | length == 0 %}
+
+                                        ### 🐥 No tags assigned yet
+
+                                        Tap **Add New Tag** after you record the
+                                        number of chicks that hatched.
+
+                                        {% else %}
+
+                                        ### 🏷️ Current Quail Tags
+
+                                        {% for tag in tags %}
+
+                                        {{ tag.color_emoji if tag.color_emoji is
+                                        defined else '🏷️' }} **{{ tag.color }}
+                                        {{ tag.number }}** · {{ tag.sex }} · {{
+                                        tag.status }}{% if tag.notes %}  
+
+                                        📝 {{ tag.notes }}{% endif %}
+
+
+                                        {% endfor %}
+
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #1f2e38 !important;
+                                            color: #1f2e38 !important;
+                                            border-radius: 22px;
+                                            background: rgba(250,253,255,1) !important;
+                                            border: 1px solid rgba(55,105,140,0.14);
+                                          }
+                                    - type: entities
+                                      title: Select an Existing Tag
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_select.incubator_tag_pick
+                                          name: Quail Tag
+                                          icon: mdi:tag-search
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                            color: #17354a !important;
+                                            border-radius: 22px;
+                                            background: rgba(245,251,255,1) !important;
+                                          }
+                                    - type: grid
+                                      columns: 2
+                                      square: false
+                                      cards:
+                                        - type: custom:mushroom-template-card
+                                          primary: ➕ Add New Tag
+                                          secondary: Assign an ID to a chick
+                                          icon: mdi:tag-plus
+                                          color: green
+                                          tap_action:
+                                            action: fire-dom-event
+                                            browser_mod:
+                                              service: browser_mod.sequence
+                                              data:
+                                                sequence:
+                                                  - service: pyscript.incubator_clear_tag_editor
+                                                  - service: browser_mod.delay
+                                                    data:
+                                                      time: 150
+                                                  - service: browser_mod.popup
+                                                    data:
+                                                      title: 🏷️ Quail Identification Tag
+                                                      adaptive: true
+                                                      adaptive_force_bottom_sheet: true
+                                                      initial_style: wide
+                                                      content:
+                                                        type: vertical-stack
+                                                        cards:
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set number =
+                                                              states('input_text.incubator_tag_number')
+                                                              %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {% if
+                                                              states('input_text.incubator_tag_edit_id')
+                                                              %}
+                                                                🏷️ Edit {{ color }} {{ number }}
+                                                              {% else %}
+                                                                🐥 Assign a New Quail Tag
+                                                              {% endif %}
+                                                            secondary: >
+                                                              Color + number is the visible ID for
+                                                              this bird
+                                                            icon: mdi:tag-heart
+                                                            color: blue
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #17354a !important;
+                                                                  --secondary-text-color: #355b70 !important;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(135deg, rgba(234,248,255,1), rgba(197,230,250,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            entity: sensor.incubator_tag_status
+                                                            primary: >
+                                                              {{ state_attr(entity, 'message') or
+                                                              'Ready' }}
+                                                            icon: >
+                                                              {{ state_attr(entity, 'icon') or
+                                                              'mdi:tag-outline' }}
+                                                            color: |
+                                                              {% set status = states(entity) %}
+                                                              {% if status == 'success' %}
+                                                                green
+                                                              {% elif status == 'error' %}
+                                                                red
+                                                              {% elif status == 'warning' %}
+                                                                orange
+                                                              {% else %}
+                                                                blue
+                                                              {% endif %}
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(250,253,255,1) !important;
+                                                                }
+                                                          - type: entities
+                                                            title: 🏷️ Tag Information
+                                                            show_header_toggle: false
+                                                            entities:
+                                                              - entity: input_select.incubator_tag_color
+                                                                name: Tag Color
+                                                                icon: mdi:palette
+                                                              - entity: input_text.incubator_tag_number
+                                                                name: Number on Tag
+                                                                icon: mdi:numeric
+                                                              - entity: input_select.incubator_tag_sex
+                                                                name: Sex
+                                                                icon: mdi:gender-male-female
+                                                              - entity: input_select.incubator_tag_status_value
+                                                                name: Bird Status
+                                                                icon: mdi:bird
+                                                              - entity: input_text.incubator_tag_notes
+                                                                name: Notes
+                                                                icon: mdi:notebook-edit
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  color: #20323e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(252,254,255,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set colors = {
+                                                                'Red':'🔴', 'Orange':'🟠', 'Yellow':'🟡', 'Green':'🟢',
+                                                                'Blue':'🔵', 'Purple':'🟣', 'Pink':'🩷', 'White':'⚪', 'Black':'⚫'
+                                                              } %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {{ colors.get(color, '🏷️') }} {{ color
+                                                              }} {{
+                                                              states('input_text.incubator_tag_number')
+                                                              or '—' }}
+                                                            secondary: >
+                                                              {{
+                                                              states('input_select.incubator_tag_sex')
+                                                              }} • {{
+                                                              states('input_select.incubator_tag_status_value')
+                                                              }}
+                                                            icon: mdi:tag
+                                                            color: blue
+                                                            vertical: true
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #172a36 !important;
+                                                                  --secondary-text-color: #48606f !important;
+                                                                  min-height: 110px;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(145deg, rgba(245,252,255,1), rgba(225,243,252,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 💾 Save Quail Tag
+                                                            secondary: Save this bird's identification record
+                                                            icon: mdi:tag-check
+                                                            color: green
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_save_tag_from_helpers
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #173d20 !important;
+                                                                  --secondary-text-color: #37613e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(226,252,226,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 🗑️ Delete This Tag Record
+                                                            secondary: >-
+                                                              Only deletes the identification record,
+                                                              not the hatch batch
+                                                            icon: mdi:tag-remove
+                                                            color: red
+                                                            visibility:
+                                                              - condition: state
+                                                                entity: input_text.incubator_tag_edit_id
+                                                                state_not: ''
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_delete_tag_from_helpers
+                                                              confirmation:
+                                                                title: Delete this quail tag record?
+                                                                text: >-
+                                                                  The hatch batch will remain. Only this
+                                                                  bird's tag record will be removed.
+                                                                confirm_text: Delete Tag
+                                                                dismiss_text: Cancel
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #5d1b24 !important;
+                                                                  --secondary-text-color: #843642 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(255,232,235,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: Close
+                                                            icon: mdi:close
+                                                            color: grey
+                                                            tap_action:
+                                                              action: fire-dom-event
+                                                              browser_mod:
+                                                                service: browser_mod.close_popup
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #173d20 !important;
+                                                --secondary-text-color: #37613e !important;
+                                                border-radius: 22px;
+                                                background: rgba(229,251,229,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: ✏️ Edit Selected Tag
+                                          secondary: Update color, number, sex or status
+                                          icon: mdi:tag-edit
+                                          color: blue
+                                          tap_action:
+                                            action: fire-dom-event
+                                            browser_mod:
+                                              service: browser_mod.sequence
+                                              data:
+                                                sequence:
+                                                  - service: pyscript.incubator_load_selected_tag_for_edit
+                                                  - service: browser_mod.delay
+                                                    data:
+                                                      time: 150
+                                                  - service: browser_mod.popup
+                                                    data:
+                                                      title: 🏷️ Quail Identification Tag
+                                                      adaptive: true
+                                                      adaptive_force_bottom_sheet: true
+                                                      initial_style: wide
+                                                      content:
+                                                        type: vertical-stack
+                                                        cards:
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set number =
+                                                              states('input_text.incubator_tag_number')
+                                                              %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {% if
+                                                              states('input_text.incubator_tag_edit_id')
+                                                              %}
+                                                                🏷️ Edit {{ color }} {{ number }}
+                                                              {% else %}
+                                                                🐥 Assign a New Quail Tag
+                                                              {% endif %}
+                                                            secondary: >
+                                                              Color + number is the visible ID for
+                                                              this bird
+                                                            icon: mdi:tag-heart
+                                                            color: blue
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #17354a !important;
+                                                                  --secondary-text-color: #355b70 !important;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(135deg, rgba(234,248,255,1), rgba(197,230,250,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            entity: sensor.incubator_tag_status
+                                                            primary: >
+                                                              {{ state_attr(entity, 'message') or
+                                                              'Ready' }}
+                                                            icon: >
+                                                              {{ state_attr(entity, 'icon') or
+                                                              'mdi:tag-outline' }}
+                                                            color: |
+                                                              {% set status = states(entity) %}
+                                                              {% if status == 'success' %}
+                                                                green
+                                                              {% elif status == 'error' %}
+                                                                red
+                                                              {% elif status == 'warning' %}
+                                                                orange
+                                                              {% else %}
+                                                                blue
+                                                              {% endif %}
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(250,253,255,1) !important;
+                                                                }
+                                                          - type: entities
+                                                            title: 🏷️ Tag Information
+                                                            show_header_toggle: false
+                                                            entities:
+                                                              - entity: input_select.incubator_tag_color
+                                                                name: Tag Color
+                                                                icon: mdi:palette
+                                                              - entity: input_text.incubator_tag_number
+                                                                name: Number on Tag
+                                                                icon: mdi:numeric
+                                                              - entity: input_select.incubator_tag_sex
+                                                                name: Sex
+                                                                icon: mdi:gender-male-female
+                                                              - entity: input_select.incubator_tag_status_value
+                                                                name: Bird Status
+                                                                icon: mdi:bird
+                                                              - entity: input_text.incubator_tag_notes
+                                                                name: Notes
+                                                                icon: mdi:notebook-edit
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  color: #20323e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(252,254,255,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set colors = {
+                                                                'Red':'🔴', 'Orange':'🟠', 'Yellow':'🟡', 'Green':'🟢',
+                                                                'Blue':'🔵', 'Purple':'🟣', 'Pink':'🩷', 'White':'⚪', 'Black':'⚫'
+                                                              } %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {{ colors.get(color, '🏷️') }} {{ color
+                                                              }} {{
+                                                              states('input_text.incubator_tag_number')
+                                                              or '—' }}
+                                                            secondary: >
+                                                              {{
+                                                              states('input_select.incubator_tag_sex')
+                                                              }} • {{
+                                                              states('input_select.incubator_tag_status_value')
+                                                              }}
+                                                            icon: mdi:tag
+                                                            color: blue
+                                                            vertical: true
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #172a36 !important;
+                                                                  --secondary-text-color: #48606f !important;
+                                                                  min-height: 110px;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(145deg, rgba(245,252,255,1), rgba(225,243,252,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 💾 Save Quail Tag
+                                                            secondary: Save this bird's identification record
+                                                            icon: mdi:tag-check
+                                                            color: green
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_save_tag_from_helpers
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #173d20 !important;
+                                                                  --secondary-text-color: #37613e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(226,252,226,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 🗑️ Delete This Tag Record
+                                                            secondary: >-
+                                                              Only deletes the identification record,
+                                                              not the hatch batch
+                                                            icon: mdi:tag-remove
+                                                            color: red
+                                                            visibility:
+                                                              - condition: state
+                                                                entity: input_text.incubator_tag_edit_id
+                                                                state_not: ''
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_delete_tag_from_helpers
+                                                              confirmation:
+                                                                title: Delete this quail tag record?
+                                                                text: >-
+                                                                  The hatch batch will remain. Only this
+                                                                  bird's tag record will be removed.
+                                                                confirm_text: Delete Tag
+                                                                dismiss_text: Cancel
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #5d1b24 !important;
+                                                                  --secondary-text-color: #843642 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(255,232,235,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: Close
+                                                            icon: mdi:close
+                                                            color: grey
+                                                            tap_action:
+                                                              action: fire-dom-event
+                                                              browser_mod:
+                                                                service: browser_mod.close_popup
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #163b55 !important;
+                                                --secondary-text-color: #3a6078 !important;
+                                                border-radius: 22px;
+                                                background: rgba(228,244,255,1) !important;
+                                              }
+                                    - type: custom:mushroom-title-card
+                                      title: 📝 Hatch Notes
+                                      subtitle: |
+                                        Record anything special about this hatch
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #291b0d !important;
+                                            --secondary-text-color: #4b341e !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_text.incubator_edit_notes
+                                          name: Hatch Notes
+                                          icon: mdi:notebook-heart
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            color: #24170a !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,253,246,1) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: 💾 Save Changes
+                                      secondary: >
+                                        Save incubation information and hatch
+                                        results
+                                      icon: mdi:content-save
+                                      color: green
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_save_edit_from_helpers
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #15351c !important;
+                                            --secondary-text-color: #295033 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              linear-gradient(
+                                                135deg,
+                                                rgba(226,255,222,1),
+                                                rgba(164,235,173,1)
+                                              ) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      entity: input_boolean.incubator_edit_archived
+                                      primary: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          📖 Restore This Hatch
+                                        {% else %}
+                                          📚 Add to Hatch History
+                                        {% endif %}
+                                      secondary: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          Return this batch to Active Hatches
+                                        {% else %}
+                                          Save this hatch in the family history
+                                        {% endif %}
+                                      icon: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          mdi:archive-arrow-up
+                                        {% else %}
+                                          mdi:archive-arrow-down
+                                        {% endif %}
+                                      color: blue
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_toggle_archive_from_helpers
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #102d45 !important;
+                                            --secondary-text-color: #294e68 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(223,242,255,1) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: 🗑️ Permanently Delete Batch
+                                      secondary: >
+                                        This removes all information about this
+                                        hatch
+                                      icon: mdi:delete-forever
+                                      color: red
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_delete_edit_batch
+                                        confirmation:
+                                          title: Delete this batch?
+                                          text: >
+                                            This permanently removes the batch and
+                                            all of its hatch information.
+                                          confirm_text: Delete
+                                          dismiss_text: Cancel
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #48141c !important;
+                                            --secondary-text-color: #6b2934 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,228,232,1) !important;
+
+                                            border:
+                                              1px solid rgba(160,45,60,0.20);
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: Close
+                                      icon: mdi:close
+                                      color: grey
+                                      tap_action:
+                                        action: fire-dom-event
+                                        browser_mod:
+                                          service: browser_mod.close_popup
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --primary-text-color: #24170a !important;
+                          --secondary-text-color: #3d2917 !important;
+
+                          margin-bottom: 11px;
+
+                          border-radius: 26px;
+
+                          background:
+                            linear-gradient(
+                              145deg,
+                              rgba(255,255,255,0.995),
+                              rgba(255,241,205,0.99)
+                            ) !important;
+
+                          border:
+                            1px solid rgba(120,80,25,0.20);
+
+                          box-shadow:
+                            0 9px 24px rgba(65,45,10,0.18);
+
+                          transition:
+                            transform 0.2s ease,
+                            box-shadow 0.2s ease;
+
+                          animation:
+                            activeBatchFloat 7s ease-in-out infinite;
+                        }
+
+                        ha-card:hover {
+                          transform:
+                            translateY(-3px)
+                            scale(1.01);
+
+                          box-shadow:
+                            0 13px 30px rgba(65,45,10,0.25);
+                        }
+
+                        @keyframes activeBatchFloat {
+                          0%, 100% {
+                            transform: translateY(0px);
+                          }
+
+                          50% {
+                            transform: translateY(-2px);
+                          }
+                        }
+            sort:
+              method: attribute
+              attribute: hatch_date
+            else:
+              type: custom:mushroom-template-card
+              primary: 💤 No Eggs Incubating
+              secondary: |
+                Tap Start a New Hatch when the next quail adventure begins!
+              icon: mdi:egg-off
+              color: grey
+              card_mod:
+                style: |
+                  ha-card {
+                    --primary-text-color: #2a1b0b !important;
+                    --secondary-text-color: #493018 !important;
+
+                    border-radius: 24px;
+
+                    background:
+                      rgba(255,250,235,0.99) !important;
+
+                    box-shadow:
+                      0 7px 20px rgba(70,45,15,0.15);
+                  }
+      - type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: 📚 Family Hatch History
+            subtitle: |
+              Our past hatches and little success stories
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #16341c !important;
+                  --secondary-text-color: #2a5131 !important;
+
+                  border-radius: 22px;
+
+                  background:
+                    rgba(238,253,235,0.99) !important;
+
+                  box-shadow:
+                    0 7px 20px rgba(35,85,45,0.15);
+                }
+          - type: custom:mushroom-template-card
+            entity: sensor.incubator_archived_batches
+            primary: |
+              {{ states(entity) }}
+            secondary: 📖 Batches in our hatch book
+            icon: mdi:book-open-page-variant
+            color: teal
+            vertical: true
+            tap_action:
+              action: none
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #15351c !important;
+                  --secondary-text-color: #295033 !important;
+
+                  border-radius: 24px;
+
+                  background:
+                    linear-gradient(
+                      145deg,
+                      rgba(241,255,238,0.99),
+                      rgba(190,235,190,0.99)
+                    ) !important;
+
+                  border:
+                    1px solid rgba(45,100,55,0.17);
+
+                  box-shadow:
+                    0 8px 22px rgba(40,90,40,0.17);
+                }
+          - type: custom:auto-entities
+            card:
+              type: vertical-stack
+            card_param: cards
+            filter:
+              include:
+                - entity_id: sensor.incubator_archive_*
+                  options:
+                    type: custom:mushroom-template-card
+                    entity: this.entity_id
+                    primary: |
+                      🏆 {{ state_attr(
+                          entity,
+                          'friendly_name'
+                      ) }}
+                    secondary: >
+                      🐣 {{ state_attr(entity, 'species') }} • 🥚 {{
+                      state_attr(entity, 'eggs') }} eggs
+
+                      🏷️ Tagged Birds: {{ state_attr(entity, 'tag_count') |
+                      int(0) }} {% set tag_summary = state_attr(entity,
+                      'tag_summary') %} {% if tag_summary %}{{ tag_summary }}{%
+                      endif %}
+
+                      📅 Hatch Date: {{ state_attr(entity, 'hatch_date') }}
+
+                      {% set hatch_date = state_attr(entity, 'hatch_date') %} {%
+                      if hatch_date %}
+                        {% set hatch = strptime(hatch_date, '%Y-%m-%d') %}
+                        {% set age_days = (now().date() - hatch.date()).days %}
+                        {% set age_weeks = age_days // 7 %}
+                        {% set extra_days = age_days % 7 %}
+                      🐤 Current Age: {{ age_weeks }} week{{ '' if age_weeks ==
+                      1 else 's' }}{% if extra_days > 0 %}, {{ extra_days }}
+                      day{{ '' if extra_days == 1 else 's' }}{% endif %} {% else
+                      %} 🐤 Current Age: Unknown {% endif %}
+
+                      🐥 Hatched: {{ state_attr(entity, 'hatched') }}
+
+                      🚫 Infertile: {{ state_attr(entity, 'infertile') }}
+
+                      💔 Losses: {{ state_attr(entity, 'losses') }}
+
+
+                      📊 Overall Hatch Rate: {{ state_attr(entity,
+                      'hatch_percentage') }}%
+
+                      🌱 Fertile Hatch Rate: {{ state_attr(entity,
+                      'fertile_hatch_percentage') }}%
+
+
+                      {% set remaining =
+                        state_attr(
+                          entity,
+                          'unaccounted'
+                        )
+                        | int(0)
+                      %}
+
+
+                      {% if remaining == 0 %}
+
+                      ⭐ All eggs accounted for!
+
+                      {% else %}
+
+                      ❓ {{ remaining }} egg{{ '' if remaining == 1 else 's' }}
+                      unaccounted
+
+                      {% endif %}
+
+
+                      {% set notes =
+                        state_attr(
+                          entity,
+                          'notes'
+                        )
+                      %}
+
+
+                      {% if notes %}
+
+                      📝 {{ notes }}
+
+                      {% endif %}
+                    multiline_secondary: true
+                    icon: mdi:bird
+                    color: |
+                      {% set rate =
+                        state_attr(
+                          entity,
+                          'hatch_percentage'
+                        )
+                        | float(0)
+                      %}
+                      {% if rate >= 80 %}
+                        green
+                      {% elif rate >= 60 %}
+                        amber
+                      {% else %}
+                        grey
+                      {% endif %}
+                    badge_text: |
+                      {{ state_attr(
+                          entity,
+                          'hatch_percentage'
+                      ) }}%
+                    badge_color: green
+                    tap_action:
+                      action: fire-dom-event
+                      browser_mod:
+                        service: browser_mod.sequence
+                        data:
+                          sequence:
+                            - service: pyscript.incubator_load_batch_for_edit
+                              data:
+                                id: this.entity_id
+                            - service: browser_mod.delay
+                              data:
+                                time: 300
+                            - service: browser_mod.popup
+                              data:
+                                title: 🐥 Hatch Batch Editor
+                                adaptive: true
+                                adaptive_force_bottom_sheet: true
+                                initial_style: wide
+                                content:
+                                  type: vertical-stack
+                                  cards:
+                                    - type: custom:mushroom-template-card
+                                      primary: |
+                                        🥚 {{ states(
+                                            'input_text.incubator_edit_name'
+                                        ) }}
+                                      secondary: |
+                                        {{ states(
+                                            'input_text.incubator_edit_species'
+                                        ) }} • Batch #{{ states(
+                                            'input_text.incubator_edit_id'
+                                        ) }}
+                                      icon: |
+                                        {% if is_state(
+                                            'input_boolean.incubator_edit_archived',
+                                            'on'
+                                        ) %}
+                                          mdi:archive
+                                        {% else %}
+                                          mdi:egg-easter
+                                        {% endif %}
+                                      color: |
+                                        {% if is_state(
+                                            'input_boolean.incubator_edit_archived',
+                                            'on'
+                                        ) %}
+                                          grey
+                                        {% else %}
+                                          amber
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #2a1b0b !important;
+                                            --secondary-text-color: #493018 !important;
+
+                                            border-radius: 24px;
+
+                                            background:
+                                              linear-gradient(
+                                                135deg,
+                                                rgba(255,248,219,1),
+                                                rgba(255,216,152,1)
+                                              ) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      entity: sensor.incubator_editor_status
+                                      primary: |
+                                        {{ state_attr(
+                                            entity,
+                                            'message'
+                                        ) or 'Ready' }}
+                                      icon: |
+                                        {{ state_attr(
+                                            entity,
+                                            'icon'
+                                        ) or 'mdi:information' }}
+                                      color: |
+                                        {% set status = states(entity) %}
+                                        {% if status == 'success' %}
+                                          green
+                                        {% elif status == 'error' %}
+                                          red
+                                        {% elif status == 'warning' %}
+                                          orange
+                                        {% else %}
+                                          blue
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,252,241,1) !important;
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🥚 Batch Information
+                                      subtitle: |
+                                        Update the incubation details
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #291b0d !important;
+                                            --secondary-text-color: #4b341e !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_text.incubator_edit_name
+                                          name: Batch Name
+                                          icon: mdi:tag-heart
+                                        - entity: input_text.incubator_edit_species
+                                          name: Species
+                                          icon: mdi:bird
+                                        - entity: input_number.incubator_edit_eggs
+                                          name: Eggs Set
+                                          icon: mdi:egg
+                                        - entity: input_text.incubator_edit_start_date
+                                          name: Start Date
+                                          icon: mdi:calendar-start
+                                        - entity: input_number.incubator_edit_days
+                                          name: Incubation Days
+                                          icon: mdi:calendar-range
+                                        - entity: input_number.incubator_edit_candle
+                                          name: Candling Day
+                                          icon: mdi:flashlight
+                                        - entity: input_number.incubator_edit_lockdown
+                                          name: Lockdown Day
+                                          icon: mdi:lock-clock
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            color: #24170a !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,253,246,1) !important;
+
+                                            border:
+                                              1px solid rgba(100,70,25,0.15);
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🐣 Hatch Results
+                                      subtitle: |
+                                        Fill these in when the chicks arrive!
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17351e !important;
+                                            --secondary-text-color: #31543a !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_number.incubator_edit_hatched
+                                          name: Hatched Chicks
+                                          icon: mdi:bird
+                                        - entity: input_number.incubator_edit_infertile
+                                          name: Infertile Eggs
+                                          icon: mdi:egg-off
+                                        - entity: input_number.incubator_edit_losses
+                                          name: Losses
+                                          icon: mdi:heart-broken
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17351e !important;
+                                            --secondary-text-color: #31543a !important;
+
+                                            color: #17351e !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(244,255,240,1) !important;
+
+                                            border:
+                                              1px solid rgba(55,105,60,0.15);
+                                          }
+                                    - type: grid
+                                      columns: 2
+                                      square: false
+                                      cards:
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {% set eggs =
+                                              states(
+                                                'input_number.incubator_edit_eggs'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set hatched =
+                                              states(
+                                                'input_number.incubator_edit_hatched'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% if eggs > 0 %}
+                                              {{ ((hatched / eggs) * 100) | round(1) }}%
+                                            {% else %}
+                                              0%
+                                            {% endif %}
+                                          secondary: 🐥 Overall Hatch Rate
+                                          icon: mdi:percent
+                                          color: green
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #15351c !important;
+                                                --secondary-text-color: #295033 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(226,250,222,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {% set eggs =
+                                              states(
+                                                'input_number.incubator_edit_eggs'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set infertile =
+                                              states(
+                                                'input_number.incubator_edit_infertile'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set hatched =
+                                              states(
+                                                'input_number.incubator_edit_hatched'
+                                              )
+                                              | int(0)
+                                            %}
+                                            {% set fertile =
+                                              eggs - infertile
+                                            %}
+                                            {% if fertile > 0 %}
+                                              {{ ((hatched / fertile) * 100) | round(1) }}%
+                                            {% else %}
+                                              0%
+                                            {% endif %}
+                                          secondary: 🌱 Fertile Hatch Rate
+                                          icon: mdi:sprout
+                                          color: teal
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #103b34 !important;
+                                                --secondary-text-color: #275b51 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(221,249,242,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {{ states(
+                                                'input_number.incubator_edit_hatched'
+                                            ) | int(0) }}
+                                          secondary: 🐣 Hatched
+                                          icon: mdi:bird
+                                          color: green
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #15351c !important;
+                                                --secondary-text-color: #295033 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(230,250,226,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: |
+                                            {{ states(
+                                                'input_number.incubator_edit_losses'
+                                            ) | int(0) }}
+                                          secondary: 💔 Losses
+                                          icon: mdi:heart-broken
+                                          color: red
+                                          vertical: true
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #451821 !important;
+                                                --secondary-text-color: #692b37 !important;
+
+                                                border-radius: 20px;
+
+                                                background:
+                                                  rgba(255,232,235,1) !important;
+                                              }
+                                    - type: custom:mushroom-template-card
+                                      primary: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set remaining =
+                                          eggs - h - i - l
+                                        %}
+                                        {% if remaining < 0 %}
+                                          ⚠️ Too many results entered!
+                                        {% elif remaining == 0 %}
+                                          ⭐ Every egg is accounted for!
+                                        {% else %}
+                                          🥚 {{ remaining }}
+                                          egg{{ '' if remaining == 1 else 's' }}
+                                          left to account for
+                                        {% endif %}
+                                      secondary: >
+                                        Hatched + Infertile + Losses should
+                                        equal Eggs Set
+                                      icon: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set total = h + i + l %}
+                                        {% if total > eggs %}
+                                          mdi:alert-circle
+                                        {% elif total == eggs %}
+                                          mdi:star-circle
+                                        {% else %}
+                                          mdi:egg-outline
+                                        {% endif %}
+                                      color: |
+                                        {% set eggs =
+                                          states(
+                                            'input_number.incubator_edit_eggs'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set h =
+                                          states(
+                                            'input_number.incubator_edit_hatched'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set i =
+                                          states(
+                                            'input_number.incubator_edit_infertile'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set l =
+                                          states(
+                                            'input_number.incubator_edit_losses'
+                                          )
+                                          | int(0)
+                                        %}
+                                        {% set total = h + i + l %}
+                                        {% if total > eggs %}
+                                          red
+                                        {% elif total == eggs %}
+                                          green
+                                        {% else %}
+                                          amber
+                                        {% endif %}
+                                      multiline_secondary: true
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #2a1b0b !important;
+                                            --secondary-text-color: #493018 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,248,221,1) !important;
+                                          }
+                                    - type: custom:mushroom-title-card
+                                      title: 🏷️ Quail Identification Tags
+                                      subtitle: >
+                                        Match each hatched chick to its colored
+                                        numbered leg tag
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set tagged = state_attr(e,
+                                        'tag_count') | int(0) %}
+
+                                        {% set hatched = state_attr(e,
+                                        'hatched') | int(0) %}
+
+                                        🏷️ {{ tagged }} of {{ hatched }} chicks
+                                        tagged
+                                      secondary: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set need = state_attr(e,
+                                        'untagged_chicks') | int(0) %}
+
+                                        {% if need > 0 %}
+                                          🐥 {{ need }} chick{{ '' if need == 1 else 's' }} still need{{ '' if need != 1 else 's' }} a tag
+                                        {% elif (state_attr(e, 'hatched') |
+                                        int(0)) > 0 %}
+                                          ✅ Every hatched chick has an ID record
+                                        {% else %}
+                                          Record hatched chicks first, then assign tags
+                                        {% endif %}
+                                      icon: mdi:tag-multiple
+                                      color: blue
+                                      multiline_secondary: true
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                            border-radius: 22px;
+                                            background: rgba(233,247,255,1) !important;
+                                          }
+                                    - type: markdown
+                                      content: >
+                                        {% set id =
+                                        states('input_text.incubator_edit_id')
+                                        %}
+
+                                        {% set active =
+                                        'sensor.incubator_batch_' ~ id %}
+
+                                        {% set archived =
+                                        'sensor.incubator_archive_' ~ id %}
+
+                                        {% set e = active if states(active) not
+                                        in ['unknown','unavailable'] else
+                                        archived %}
+
+                                        {% set tags = state_attr(e, 'tags') or
+                                        [] %}
+
+                                        {% if tags | length == 0 %}
+
+                                        ### 🐥 No tags assigned yet
+
+                                        Tap **Add New Tag** after you record the
+                                        number of chicks that hatched.
+
+                                        {% else %}
+
+                                        ### 🏷️ Current Quail Tags
+
+                                        {% for tag in tags %}
+
+                                        {{ tag.color_emoji if tag.color_emoji is
+                                        defined else '🏷️' }} **{{ tag.color }}
+                                        {{ tag.number }}** · {{ tag.sex }} · {{
+                                        tag.status }}{% if tag.notes %}  
+
+                                        📝 {{ tag.notes }}{% endif %}
+
+
+                                        {% endfor %}
+
+                                        {% endif %}
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #1f2e38 !important;
+                                            color: #1f2e38 !important;
+                                            border-radius: 22px;
+                                            background: rgba(250,253,255,1) !important;
+                                            border: 1px solid rgba(55,105,140,0.14);
+                                          }
+                                    - type: entities
+                                      title: Select an Existing Tag
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_select.incubator_tag_pick
+                                          name: Quail Tag
+                                          icon: mdi:tag-search
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #17354a !important;
+                                            --secondary-text-color: #355b70 !important;
+                                            color: #17354a !important;
+                                            border-radius: 22px;
+                                            background: rgba(245,251,255,1) !important;
+                                          }
+                                    - type: grid
+                                      columns: 2
+                                      square: false
+                                      cards:
+                                        - type: custom:mushroom-template-card
+                                          primary: ➕ Add New Tag
+                                          secondary: Assign an ID to a chick
+                                          icon: mdi:tag-plus
+                                          color: green
+                                          tap_action:
+                                            action: fire-dom-event
+                                            browser_mod:
+                                              service: browser_mod.sequence
+                                              data:
+                                                sequence:
+                                                  - service: pyscript.incubator_clear_tag_editor
+                                                  - service: browser_mod.delay
+                                                    data:
+                                                      time: 150
+                                                  - service: browser_mod.popup
+                                                    data:
+                                                      title: 🏷️ Quail Identification Tag
+                                                      adaptive: true
+                                                      adaptive_force_bottom_sheet: true
+                                                      initial_style: wide
+                                                      content:
+                                                        type: vertical-stack
+                                                        cards:
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set number =
+                                                              states('input_text.incubator_tag_number')
+                                                              %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {% if
+                                                              states('input_text.incubator_tag_edit_id')
+                                                              %}
+                                                                🏷️ Edit {{ color }} {{ number }}
+                                                              {% else %}
+                                                                🐥 Assign a New Quail Tag
+                                                              {% endif %}
+                                                            secondary: >
+                                                              Color + number is the visible ID for
+                                                              this bird
+                                                            icon: mdi:tag-heart
+                                                            color: blue
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #17354a !important;
+                                                                  --secondary-text-color: #355b70 !important;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(135deg, rgba(234,248,255,1), rgba(197,230,250,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            entity: sensor.incubator_tag_status
+                                                            primary: >
+                                                              {{ state_attr(entity, 'message') or
+                                                              'Ready' }}
+                                                            icon: >
+                                                              {{ state_attr(entity, 'icon') or
+                                                              'mdi:tag-outline' }}
+                                                            color: |
+                                                              {% set status = states(entity) %}
+                                                              {% if status == 'success' %}
+                                                                green
+                                                              {% elif status == 'error' %}
+                                                                red
+                                                              {% elif status == 'warning' %}
+                                                                orange
+                                                              {% else %}
+                                                                blue
+                                                              {% endif %}
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(250,253,255,1) !important;
+                                                                }
+                                                          - type: entities
+                                                            title: 🏷️ Tag Information
+                                                            show_header_toggle: false
+                                                            entities:
+                                                              - entity: input_select.incubator_tag_color
+                                                                name: Tag Color
+                                                                icon: mdi:palette
+                                                              - entity: input_text.incubator_tag_number
+                                                                name: Number on Tag
+                                                                icon: mdi:numeric
+                                                              - entity: input_select.incubator_tag_sex
+                                                                name: Sex
+                                                                icon: mdi:gender-male-female
+                                                              - entity: input_select.incubator_tag_status_value
+                                                                name: Bird Status
+                                                                icon: mdi:bird
+                                                              - entity: input_text.incubator_tag_notes
+                                                                name: Notes
+                                                                icon: mdi:notebook-edit
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  color: #20323e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(252,254,255,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set colors = {
+                                                                'Red':'🔴', 'Orange':'🟠', 'Yellow':'🟡', 'Green':'🟢',
+                                                                'Blue':'🔵', 'Purple':'🟣', 'Pink':'🩷', 'White':'⚪', 'Black':'⚫'
+                                                              } %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {{ colors.get(color, '🏷️') }} {{ color
+                                                              }} {{
+                                                              states('input_text.incubator_tag_number')
+                                                              or '—' }}
+                                                            secondary: >
+                                                              {{
+                                                              states('input_select.incubator_tag_sex')
+                                                              }} • {{
+                                                              states('input_select.incubator_tag_status_value')
+                                                              }}
+                                                            icon: mdi:tag
+                                                            color: blue
+                                                            vertical: true
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #172a36 !important;
+                                                                  --secondary-text-color: #48606f !important;
+                                                                  min-height: 110px;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(145deg, rgba(245,252,255,1), rgba(225,243,252,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 💾 Save Quail Tag
+                                                            secondary: Save this bird's identification record
+                                                            icon: mdi:tag-check
+                                                            color: green
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_save_tag_from_helpers
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #173d20 !important;
+                                                                  --secondary-text-color: #37613e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(226,252,226,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 🗑️ Delete This Tag Record
+                                                            secondary: >-
+                                                              Only deletes the identification record,
+                                                              not the hatch batch
+                                                            icon: mdi:tag-remove
+                                                            color: red
+                                                            visibility:
+                                                              - condition: state
+                                                                entity: input_text.incubator_tag_edit_id
+                                                                state_not: ''
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_delete_tag_from_helpers
+                                                              confirmation:
+                                                                title: Delete this quail tag record?
+                                                                text: >-
+                                                                  The hatch batch will remain. Only this
+                                                                  bird's tag record will be removed.
+                                                                confirm_text: Delete Tag
+                                                                dismiss_text: Cancel
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #5d1b24 !important;
+                                                                  --secondary-text-color: #843642 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(255,232,235,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: Close
+                                                            icon: mdi:close
+                                                            color: grey
+                                                            tap_action:
+                                                              action: fire-dom-event
+                                                              browser_mod:
+                                                                service: browser_mod.close_popup
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #173d20 !important;
+                                                --secondary-text-color: #37613e !important;
+                                                border-radius: 22px;
+                                                background: rgba(229,251,229,1) !important;
+                                              }
+                                        - type: custom:mushroom-template-card
+                                          primary: ✏️ Edit Selected Tag
+                                          secondary: Update color, number, sex or status
+                                          icon: mdi:tag-edit
+                                          color: blue
+                                          tap_action:
+                                            action: fire-dom-event
+                                            browser_mod:
+                                              service: browser_mod.sequence
+                                              data:
+                                                sequence:
+                                                  - service: pyscript.incubator_load_selected_tag_for_edit
+                                                  - service: browser_mod.delay
+                                                    data:
+                                                      time: 150
+                                                  - service: browser_mod.popup
+                                                    data:
+                                                      title: 🏷️ Quail Identification Tag
+                                                      adaptive: true
+                                                      adaptive_force_bottom_sheet: true
+                                                      initial_style: wide
+                                                      content:
+                                                        type: vertical-stack
+                                                        cards:
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set number =
+                                                              states('input_text.incubator_tag_number')
+                                                              %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {% if
+                                                              states('input_text.incubator_tag_edit_id')
+                                                              %}
+                                                                🏷️ Edit {{ color }} {{ number }}
+                                                              {% else %}
+                                                                🐥 Assign a New Quail Tag
+                                                              {% endif %}
+                                                            secondary: >
+                                                              Color + number is the visible ID for
+                                                              this bird
+                                                            icon: mdi:tag-heart
+                                                            color: blue
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #17354a !important;
+                                                                  --secondary-text-color: #355b70 !important;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(135deg, rgba(234,248,255,1), rgba(197,230,250,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            entity: sensor.incubator_tag_status
+                                                            primary: >
+                                                              {{ state_attr(entity, 'message') or
+                                                              'Ready' }}
+                                                            icon: >
+                                                              {{ state_attr(entity, 'icon') or
+                                                              'mdi:tag-outline' }}
+                                                            color: |
+                                                              {% set status = states(entity) %}
+                                                              {% if status == 'success' %}
+                                                                green
+                                                              {% elif status == 'error' %}
+                                                                red
+                                                              {% elif status == 'warning' %}
+                                                                orange
+                                                              {% else %}
+                                                                blue
+                                                              {% endif %}
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(250,253,255,1) !important;
+                                                                }
+                                                          - type: entities
+                                                            title: 🏷️ Tag Information
+                                                            show_header_toggle: false
+                                                            entities:
+                                                              - entity: input_select.incubator_tag_color
+                                                                name: Tag Color
+                                                                icon: mdi:palette
+                                                              - entity: input_text.incubator_tag_number
+                                                                name: Number on Tag
+                                                                icon: mdi:numeric
+                                                              - entity: input_select.incubator_tag_sex
+                                                                name: Sex
+                                                                icon: mdi:gender-male-female
+                                                              - entity: input_select.incubator_tag_status_value
+                                                                name: Bird Status
+                                                                icon: mdi:bird
+                                                              - entity: input_text.incubator_tag_notes
+                                                                name: Notes
+                                                                icon: mdi:notebook-edit
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #20323e !important;
+                                                                  --secondary-text-color: #496272 !important;
+                                                                  color: #20323e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(252,254,255,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: >
+                                                              {% set colors = {
+                                                                'Red':'🔴', 'Orange':'🟠', 'Yellow':'🟡', 'Green':'🟢',
+                                                                'Blue':'🔵', 'Purple':'🟣', 'Pink':'🩷', 'White':'⚪', 'Black':'⚫'
+                                                              } %}
+
+                                                              {% set color =
+                                                              states('input_select.incubator_tag_color')
+                                                              %}
+
+                                                              {{ colors.get(color, '🏷️') }} {{ color
+                                                              }} {{
+                                                              states('input_text.incubator_tag_number')
+                                                              or '—' }}
+                                                            secondary: >
+                                                              {{
+                                                              states('input_select.incubator_tag_sex')
+                                                              }} • {{
+                                                              states('input_select.incubator_tag_status_value')
+                                                              }}
+                                                            icon: mdi:tag
+                                                            color: blue
+                                                            vertical: true
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #172a36 !important;
+                                                                  --secondary-text-color: #48606f !important;
+                                                                  min-height: 110px;
+                                                                  border-radius: 24px;
+                                                                  background: linear-gradient(145deg, rgba(245,252,255,1), rgba(225,243,252,1)) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 💾 Save Quail Tag
+                                                            secondary: Save this bird's identification record
+                                                            icon: mdi:tag-check
+                                                            color: green
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_save_tag_from_helpers
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #173d20 !important;
+                                                                  --secondary-text-color: #37613e !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(226,252,226,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: 🗑️ Delete This Tag Record
+                                                            secondary: >-
+                                                              Only deletes the identification record,
+                                                              not the hatch batch
+                                                            icon: mdi:tag-remove
+                                                            color: red
+                                                            visibility:
+                                                              - condition: state
+                                                                entity: input_text.incubator_tag_edit_id
+                                                                state_not: ''
+                                                            tap_action:
+                                                              action: perform-action
+                                                              perform_action: pyscript.incubator_delete_tag_from_helpers
+                                                              confirmation:
+                                                                title: Delete this quail tag record?
+                                                                text: >-
+                                                                  The hatch batch will remain. Only this
+                                                                  bird's tag record will be removed.
+                                                                confirm_text: Delete Tag
+                                                                dismiss_text: Cancel
+                                                            card_mod:
+                                                              style: |
+                                                                ha-card {
+                                                                  --primary-text-color: #5d1b24 !important;
+                                                                  --secondary-text-color: #843642 !important;
+                                                                  border-radius: 22px;
+                                                                  background: rgba(255,232,235,1) !important;
+                                                                }
+                                                          - type: custom:mushroom-template-card
+                                                            primary: Close
+                                                            icon: mdi:close
+                                                            color: grey
+                                                            tap_action:
+                                                              action: fire-dom-event
+                                                              browser_mod:
+                                                                service: browser_mod.close_popup
+                                          card_mod:
+                                            style: |
+                                              ha-card {
+                                                --primary-text-color: #163b55 !important;
+                                                --secondary-text-color: #3a6078 !important;
+                                                border-radius: 22px;
+                                                background: rgba(228,244,255,1) !important;
+                                              }
+                                    - type: custom:mushroom-title-card
+                                      title: 📝 Hatch Notes
+                                      subtitle: |
+                                        Record anything special about this hatch
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #291b0d !important;
+                                            --secondary-text-color: #4b341e !important;
+                                          }
+                                    - type: entities
+                                      show_header_toggle: false
+                                      entities:
+                                        - entity: input_text.incubator_edit_notes
+                                          name: Hatch Notes
+                                          icon: mdi:notebook-heart
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #24170a !important;
+                                            --secondary-text-color: #43301d !important;
+
+                                            color: #24170a !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,253,246,1) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: 💾 Save Changes
+                                      secondary: >
+                                        Save incubation information and hatch
+                                        results
+                                      icon: mdi:content-save
+                                      color: green
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_save_edit_from_helpers
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #15351c !important;
+                                            --secondary-text-color: #295033 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              linear-gradient(
+                                                135deg,
+                                                rgba(226,255,222,1),
+                                                rgba(164,235,173,1)
+                                              ) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      entity: input_boolean.incubator_edit_archived
+                                      primary: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          📖 Restore This Hatch
+                                        {% else %}
+                                          📚 Add to Hatch History
+                                        {% endif %}
+                                      secondary: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          Return this batch to Active Hatches
+                                        {% else %}
+                                          Save this hatch in the family history
+                                        {% endif %}
+                                      icon: |
+                                        {% if is_state(
+                                            entity,
+                                            'on'
+                                        ) %}
+                                          mdi:archive-arrow-up
+                                        {% else %}
+                                          mdi:archive-arrow-down
+                                        {% endif %}
+                                      color: blue
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_toggle_archive_from_helpers
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #102d45 !important;
+                                            --secondary-text-color: #294e68 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(223,242,255,1) !important;
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: 🗑️ Permanently Delete Batch
+                                      secondary: >
+                                        This removes all information about this
+                                        hatch
+                                      icon: mdi:delete-forever
+                                      color: red
+                                      tap_action:
+                                        action: perform-action
+                                        perform_action: pyscript.incubator_delete_edit_batch
+                                        confirmation:
+                                          title: Delete this batch?
+                                          text: >
+                                            This permanently removes the batch and
+                                            all of its hatch information.
+                                          confirm_text: Delete
+                                          dismiss_text: Cancel
+                                      card_mod:
+                                        style: |
+                                          ha-card {
+                                            --primary-text-color: #48141c !important;
+                                            --secondary-text-color: #6b2934 !important;
+
+                                            border-radius: 22px;
+
+                                            background:
+                                              rgba(255,228,232,1) !important;
+
+                                            border:
+                                              1px solid rgba(160,45,60,0.20);
+                                          }
+                                    - type: custom:mushroom-template-card
+                                      primary: Close
+                                      icon: mdi:close
+                                      color: grey
+                                      tap_action:
+                                        action: fire-dom-event
+                                        browser_mod:
+                                          service: browser_mod.close_popup
+                    card_mod:
+                      style: |
+                        ha-card {
+                          --primary-text-color: #143219 !important;
+                          --secondary-text-color: #294a30 !important;
+
+                          margin-bottom: 11px;
+
+                          border-radius: 26px;
+
+                          background:
+                            linear-gradient(
+                              145deg,
+                              rgba(249,255,246,0.995),
+                              rgba(215,241,210,0.99)
+                            ) !important;
+
+                          border:
+                            1px solid rgba(45,100,55,0.18);
+
+                          box-shadow:
+                            0 8px 22px rgba(40,90,40,0.17);
+                        }
+            sort:
+              method: attribute
+              attribute: hatch_date
+              reverse: true
+            else:
+              type: custom:mushroom-template-card
+              primary: 📖 Our Hatch Book Is Empty
+              secondary: |
+                Archived hatches will appear here.
+              icon: mdi:book-open-outline
+              color: grey
+              card_mod:
+                style: |
+                  ha-card {
+                    --primary-text-color: #16341c !important;
+                    --secondary-text-color: #2a5131 !important;
+
+                    border-radius: 24px;
+
+                    background:
+                      rgba(240,252,237,0.99) !important;
+
+                    box-shadow:
+                      0 7px 20px rgba(35,85,45,0.15);
+                  }
+      - type: grid
+        cards:
+          - type: custom:mushroom-title-card
+            title: 🏷️ Quail Tag Registry
+            subtitle: |
+              Every tagged bird stays linked to the hatch it came from
+            card_mod:
+              style: |
+                ha-card {
+                  --primary-text-color: #17354a !important;
+                  --secondary-text-color: #355b70 !important;
+                  border-radius: 22px;
+                  background: rgba(237,249,255,0.99) !important;
+                  box-shadow: 0 7px 20px rgba(35,75,95,0.14);
+                }
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_total_tags
+                primary: |
+                  {{ states(entity) }}
+                secondary: Total Tag Records
+                icon: mdi:tag-multiple
+                color: blue
+                vertical: true
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_active_tags
+                primary: |
+                  {{ states(entity) }}
+                secondary: Active Tagged Quail
+                icon: mdi:bird
+                color: green
+                vertical: true
+              - type: custom:mushroom-template-card
+                entity: sensor.incubator_untagged_chicks
+                primary: |
+                  {{ states(entity) }}
+                secondary: Chicks Needing Tags
+                icon: mdi:tag-off
+                color: orange
+                vertical: true
+          - type: custom:auto-entities
+            card:
+              type: entities
+              title: Tagged Quail
+              show_header_toggle: false
+            filter:
+              include:
+                - entity_id: sensor.quail_tag_*
+                  options:
+                    secondary_info: last-changed
+              exclude: []
+            sort:
+              method: name
+              numeric: true
+            show_empty: false
+      - type: grid
+        cards: []

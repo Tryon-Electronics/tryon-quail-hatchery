@@ -1,0 +1,21 @@
+{
+  "title": "Tryon Quail Hatchery",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Prepare Quail Hatchery files",
+        "description": "Install and configure Pyscript with allow_all_imports first. This prepares 27 YAML helpers, the dashboard/card, artwork, a notification blueprint and an empty data file. Existing batch data and edited files are preserved. Enable packages and add the YAML dashboard in configuration.yaml, check configuration, then restart. See the README for migration and dependency setup.",
+        "data": {
+          "ready": "I have read the setup instructions and configured Pyscript"
+        }
+      }
+    },
+    "error": {
+      "pyscript_missing": "Install and configure Pyscript through HACS first.",
+      "setup_required": "Read the setup instructions and confirm readiness."
+    },
+    "abort": {
+      "already_configured": "Only one hatchery instance is supported with the current entity IDs."
+    }
+  }
+}

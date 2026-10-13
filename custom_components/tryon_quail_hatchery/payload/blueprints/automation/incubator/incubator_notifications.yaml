@@ -1,0 +1,83 @@
+blueprint:
+  name: Incubator - Daily Status & Milestone Alerts
+  description: >-
+    Daily hatch status plus candling, lockdown and hatch-day reminders for active
+    batches. Requires the Tryon Quail Hatchery Pyscript sensors. This is the
+    distributable blueprint matching the supplied automation's input name.
+  domain: automation
+  source_url: https://github.com/Tryon-Electronics/tryon-quail-hatchery/blob/main/custom_components/tryon_quail_hatchery/payload/blueprints/automation/incubator/incubator_notifications.yaml
+  homeassistant:
+    min_version: 2025.1.0
+  input:
+    phone_notification_target:
+      name: Phone notification services
+      description: >-
+        Add one or more notify service names from Developer Tools > Actions,
+        such as notify.mobile_app_your_phone. No personal phone is preselected.
+      default: []
+      selector:
+        text:
+          multiple: true
+    notification_time:
+      name: Daily notification time
+      default: "09:00:00"
+      selector:
+        time: {}
+    daily_summary:
+      name: Include daily status even when no milestone is due
+      default: true
+      selector:
+        boolean: {}
+triggers:
+  - trigger: time
+    at: !input notification_time
+variables:
+  notification_targets: !input phone_notification_target
+  include_daily: !input daily_summary
+conditions:
+  - condition: template
+    value_template: "{{ notification_targets | count > 0 }}"
+actions:
+  - action: pyscript.incubator_refresh
+  - condition: state
+    entity_id: sensor.incubator_data_status
+    state: "ok"
+  - variables:
+      milestone_message: >-
+        {% set ns = namespace(parts=[]) %}
+        {% for batch in states.sensor | selectattr('entity_id', 'match', '^sensor.incubator_batch_[0-9]+$') %}
+          {% set name = batch.attributes.get('friendly_name', batch.entity_id) %}
+          {% if batch.attributes.get('days_to_candle') == 0 %}
+            {% set ns.parts = ns.parts + [name ~ ': candling day today.'] %}
+          {% endif %}
+          {% if batch.attributes.get('days_to_lockdown') == 0 %}
+            {% set ns.parts = ns.parts + [name ~ ': lockdown starts today.'] %}
+          {% endif %}
+          {% if batch.attributes.get('days_to_hatch') == 0 %}
+            {% set ns.parts = ns.parts + [name ~ ': expected hatch day today.'] %}
+          {% endif %}
+        {% endfor %}
+        {{ ns.parts | join('\n') }}
+      daily_message: >-
+        {% set ns = namespace(parts=[]) %}
+        {% if include_daily %}
+          {% set ns.parts = [states('sensor.incubator_active_batches') ~ ' active batch(es), ' ~ states('sensor.incubator_total_eggs') ~ ' eggs.'] %}
+          {% for batch in states.sensor | selectattr('entity_id', 'match', '^sensor.incubator_batch_[0-9]+$') %}
+            {% set name = batch.attributes.get('friendly_name', batch.entity_id) %}
+            {% set ns.parts = ns.parts + [name ~ ': day ' ~ batch.state ~ ', ' ~ batch.attributes.get('days_to_hatch', '?') ~ ' day(s) to hatch.'] %}
+          {% endfor %}
+        {% endif %}
+        {{ ns.parts | join('\n') }}
+  - condition: template
+    value_template: "{{ daily_message | trim != '' or milestone_message | trim != '' }}"
+  - repeat:
+      for_each: "{{ notification_targets }}"
+      sequence:
+        - condition: template
+          value_template: "{{ repeat.item is string and repeat.item.startswith('notify.') }}"
+        - action: "{{ repeat.item }}"
+          continue_on_error: true
+          data:
+            title: Quail Hatchery
+            message: "{{ [daily_message | trim, milestone_message | trim] | reject('equalto', '') | join('\n\n') }}"
+mode: single

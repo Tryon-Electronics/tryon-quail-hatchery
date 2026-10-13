@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "Example hatch",
+    "species": "Coturnix",
+    "eggs": 12,
+    "start": "2026-01-01",
+    "incubation_days": 18,
+    "lockdown_day": 14,
+    "candle_day": 7,
+    "hatched": 10,
+    "infertile": 1,
+    "losses": 1,
+    "archived": true,
+    "notes": "Example only; not loaded into a fresh installation.",
+    "results_saved_at": "2026-01-19T12:00:00",
+    "results_updated_at": "2026-01-19T12:00:00",
+    "archived_at": "2026-01-20T12:00:00",
+    "created_at": "2026-01-01T12:00:00",
+    "updated_at": "2026-01-20T12:00:00",
+    "tags": [
+      {
+        "uid": "1-1",
+        "tag_id": "BLUE-001",
+        "color": "Blue",
+        "color_emoji": "🔵",
+        "color_hex": "#1e88e5",
+        "number": "001",
+        "sex": "Unknown",
+        "status": "Active",
+        "notes": "Example identification tag",
+        "assigned_at": "2026-01-20T12:00:00",
+        "updated_at": "2026-01-20T12:00:00"
+      }
+    ]
+  }
+]
